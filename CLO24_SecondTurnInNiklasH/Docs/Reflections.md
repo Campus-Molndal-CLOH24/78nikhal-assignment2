@@ -32,14 +32,18 @@ For more information, see https://docs.github.com/get-started/writing-on-github/
 7. Samma på ICar.md, IMotorcycle.md, IVehicle.md, alla har samma felmeddelande:
 - Unable to render rich display, parse error on line 3, samma som på punkt 6.
 8. Får problem med denna Reflections.md
-- Den byter alla å, ä och ö mot �. Inte när jag läser på GitHub, men när jag laddar ner filen och kör den här. Jag har tagit bort dem successivt vartefter jag går igenom dokumentet, men jag har haft samma problematik ibland att vissa program inte sparar i filer som är kompatibla med vanliga teckenuppsättningar. Kolla inställningarna i ert .md-program? Som på punkt 5, detta hade jag inte nämnt om det inte blev så mycket som dök upp, är det många grejer som vi "hakar upp oss på" medan vi läser så är det svårt att läsa texten flytande, och då ökar risken för förvirring markant.
-
+- Den byter alla å, ä och ö mot �. Inte när jag läser på GitHub, men när jag laddar ner filen och kör den här. Jag har tagit bort dem successivt vartefter jag går igenom dokumentet, men jag har haft samma problematik ibland att vissa program inte sparar i filer som är kompatibla med vanliga teckenuppsättningar. Kolla inställningarna i ert .md-program? Som på punkt 5, detta hade jag inte nämnt om det inte blev så mycket som dök upp, är det många saker som vi "hakar upp oss på" medan vi läser så är det svårt att läsa texten flytande, och då ökar risken för förvirring markant.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Planering och genomförande
 
 ### Vilka steg tog du för att lösa uppgiften?
+
+Steg ett: läste igenom allt inlämningsmaterial för att få en övergripande bild
+Steg två: Skapade mapp- och filstrukturen och började ta grundtemplates från materialet vi hade tillgång till. Vi hade ju punkten "Steg-för-steg-arbetsgång" så de klasserna skapade jag tidigt.
+Steg tre: Satte upp en ny github-repository och initialiserade projektets mapp genom bash (git init, git remote add origin etc)
+Steg fyra: Började dokumentera i denna fil
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
