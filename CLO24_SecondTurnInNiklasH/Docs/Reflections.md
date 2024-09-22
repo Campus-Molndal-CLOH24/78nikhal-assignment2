@@ -16,35 +16,53 @@ Väldigt röriga förklaringar och fel i dokumentationen. En liten punktlista f�
 - Det här är bara rörigt. Kombinerat med texten under punkt 1 så förvirrar det här garanterat många (jag fick frågor privat från andra studerande som inte förstod varför det är olika namespace). Jag förstår tanken dock, det är att vi skall inkludera mapparna Factories och Models, oavsett vad namespacet nu än råkar heta. Men kombinerar vi det med den konstiga fraseringen i punkt 1 så ökar detta på förvirringen..
 3. Målet för VG-betyg är att följa Clean Code.
 - Enligt Robert C. Martin skulle "CarImpl" "MotorcycleImpl" inte accepterats. Vad står det för? Implementation? Då borde vi skriva så? Samtidigt står det tydligt att vi inte skall ändra namn på saker så då betyder det att vi skall lämna in detta med en namngivning vi inte tycker följer Clean Code?
+4. För att ytterligare spä på punkt 1 + 2: Tar vi kodexemplena i CarFactory.md som exempel: "using Models;" är självförklarande, men "namespace Factories"?
+- Ytterligare element av förvirring på samma tema. Det är INTE ett annat namespace, det är en annan mapp/folder/filstruktur! Namespace är hela projektet, eller hur? Vi inkluderar mappen, inte ett nytt namespace.. Samma problem ser vi återigen i MotorcycleFactory.md och alla Interface-filerna.
+5. Går vi in på CarImpl.md har vi titeln "Car Implementation" för denna fil. Går vi in på Motorcycle.Impl har vi titeln.. "Car implementation".
+- Nåja, det är väl bara kopierad text där det missats uppdatera, hade det varit allt hade jag inte ens reagerat. Nu spär det på förvirringen, tyvärr.
+6. Trasiga .md-filer: "CarImpl.md". Får felmeddelande under "Klassdiagram":
+- Unable to render rich display
 
---- Skriv ovanf�r och ta inte bort denna raden ---
+Parse error on line 3:
+... +int Doors { get; set; } }
+----------------------^
+Expecting 'STRUCT_STOP', 'MEMBER', got 'OPEN_IN_STRUCT'
 
-## Planering och genomf�rande
+For more information, see https://docs.github.com/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams
+7. Samma på ICar.md, IMotorcycle.md, IVehicle.md, alla har samma felmeddelande:
+- Unable to render rich display, parse error on line 3, samma som på punkt 6.
+8. Får problem med denna Reflections.md
+- Den byter alla å, ä och ö mot �. Inte när jag läser på GitHub, men när jag laddar ner filen och kör den här. Jag har tagit bort dem successivt vartefter jag går igenom dokumentet, men jag har haft samma problematik ibland att vissa program inte sparar i filer som är kompatibla med vanliga teckenuppsättningar. Kolla inställningarna i ert .md-program? Som på punkt 5, detta hade jag inte nämnt om det inte blev så mycket som dök upp, är det många grejer som vi "hakar upp oss på" medan vi läser så är det svårt att läsa texten flytande, och då ökar risken för förvirring markant.
 
-### Vilka steg tog du f�r att l�sa uppgiften?
 
---- Skriv ovanf�r och ta inte bort denna raden ---
+--- Skriv ovanför och ta inte bort denna raden ---
 
-## Utmaningar och l�sningar
+## Planering och genomförande
 
-### Vilka utmaningar st�tte du p� under projektet?
+### Vilka steg tog du för att lösa uppgiften?
 
---- Skriv ovanf�r och ta inte bort denna raden ---
+--- Skriv ovanför och ta inte bort denna raden ---
 
-### Hur l�ste du dessa utmaningar?
+## Utmaningar och lösningar
 
---- Skriv ovanf�r och ta inte bort denna raden ---
+### Vilka utmaningar stötte du på under projektet?
 
-### Beskriv n�gra implementeringsval du gjort?
+--- Skriv ovanför och ta inte bort denna raden ---
 
---- Skriv ovanf�r och ta inte bort denna raden ---
+### Hur löste du dessa utmaningar?
 
-## Reflektion och utv�rdering
+--- Skriv ovanför och ta inte bort denna raden ---
 
-### Vad l�rde du dig genom att genomf�ra projektet?
+### Beskriv några implementeringsval du gjort?
 
---- Skriv ovanf�r och ta inte bort denna raden ---
+--- Skriv ovanför och ta inte bort denna raden ---
 
-### Vilka m�jligheter ser du f�r framtida projekt baserat p� denna erfarenhet?
+## Reflektion och utvärdering
 
---- Skriv ovanf�r och ta inte bort denna raden ---
+### Vad lärde du dig genom att genomföra projektet?
+
+--- Skriv ovanför och ta inte bort denna raden ---
+
+### Vilka möjligheter ser du för framtida projekt baserat på denna erfarenhet?
+
+--- Skriv ovanför och ta inte bort denna raden ---
