@@ -54,6 +54,7 @@ Steg ett: läste igenom allt inlämningsmaterial för att få en övergripande b
 Steg två: Skapade mapp- och filstrukturen och började ta grundtemplates från materialet vi hade tillgång till. Vi hade ju punkten "Steg-för-steg-arbetsgång" så de klasserna skapade jag tidigt.
 Steg tre: Satte upp en ny github-repository och initialiserade projektets mapp genom bash (git init, git remote add origin etc)
 Steg fyra: Började dokumentera i denna fil, och valde sedan att omgående brancha mitt privata repository till att göra ett internt repo inom CLO24 istället.
+Steg fem: Skapade properties och metoder i CarImpl.cs
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
