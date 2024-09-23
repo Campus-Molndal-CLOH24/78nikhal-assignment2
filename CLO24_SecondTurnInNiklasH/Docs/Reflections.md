@@ -47,7 +47,8 @@ Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela proje
 ![testrun_expectedresult](image.png)
 10. Det funkade bra! Så nu ville jag bara testa att printa ut Drive()-metoden med:
 ![testrun_withdrivemethod](image-1.png)
-11. 
+11. Eftersom vi hade fyra metoder som var gemensamma så återanvände jag dem:
+IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag kallade VehicleFoundation. Det blev mycket mindre kod och mer kontroll med alla metoder i en.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -57,6 +58,7 @@ Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela proje
 
 1. Den absolut första utmaningen var att jobba med färdig kod och en layout som jag inte skapat själv.
 2. Den andra utmaningen var att jag råkade skapa en copy efter jag gjorde en fork i Git, så jag hade en extra kopia av projektet nestlad inuti min mappstruktur.
+3. När jag slog ihop fyra metoder till VehicleFoundation.cs så fick jag varningar om non-nullable-deklarationer (CS8618). De låg i properties från IVehicle när de initialiseras.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -64,6 +66,10 @@ Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela proje
 
 1. Jag läste noga igenom dokumentationen flera gånger och skapaden en plan för implementation steg-för-steg
 2. git -ls -la och sedan rm -rf (namnetpåmappen). Det hade säkert gått lika bra att bara deletea mappen direkt i Windows, men vill ha för vana att använda Bash och CLI.
+3. Det finns två lösningar: Antingen följande
+```cs```
+public string Brand { get; set; } = string.Empty; // Defaults to an empty string ```
+Eller så löser vi det genom att skapa en konstruktor som sätter default-värden för Brand, Model, Year och Mileage (det gör vi i M- och CarImplementation.cs idag). string.Empty är en enkel lösning, det endra gör mindre återanvändning av kod men den blir svårare att läsa och jobbigare om vi skall in och pilla i koden. Jag väljer string.Empty-lösningen!
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
