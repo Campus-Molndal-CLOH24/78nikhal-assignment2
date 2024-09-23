@@ -9,6 +9,9 @@ namespace CLO24_SecondTurnInNiklasH.Factories
 {
     internal class CarFactory
     {
-        // Create a car with the given number of doors
+        public CarImplementation CreateCar(string brand, string model, int year, double mileage, int doors)
+        {
+            return new CarImplementation(brand, model, year, mileage, doors);
+        }
     }
 }

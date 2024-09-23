@@ -38,7 +38,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
             return engineOn;
         }
 
-        public void StartEngine()
+        public void StartEngine() // TO DO: Why have we created these Methods twice? FIX!
         {
             if (!engineOn)
             {
@@ -61,11 +61,11 @@ namespace CLO24_SecondTurnInNiklasH.Models
         {
             if (engineOn) // We're checking if the engine is on, to make a bit more sense and a bit more fun application
             {
-                Console.WriteLine("The motorcycle is driving...");
+                return "The motorcycle is driving...";
             }
             else
             {
-                Console.WriteLine("The engine is not on.");
+                return "The engine is not on.";
             }
         }
 

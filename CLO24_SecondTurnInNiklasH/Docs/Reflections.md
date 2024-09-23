@@ -39,7 +39,11 @@ Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela proje
 5. Skapade properties och metoder i CarImpl.cs
 6. Skapade en branch, feature/creating-mechanics och började jobba i den
 7. Kopierade koden från CarImpls.cs till MotorcycleImpl.cs och modifierade den för att passa bättre till en motorcykel.. passade på att byta Impl till Implementation, så vi håller Clean Code så gott vi kan.
-8. 
+8. Jag kom hit innan jag hittade den smått gömda filen project.md! Där finns steg för steg-guider som mer eller mindre visar på allt jag skrev ovanför, haha. Nu är det dags för buggfixande, jag har 6 st errors och 0 warnings. Det var följande:
+- CS0246, råkade göra ett ínt istället för int!
+- CS0738, kunde inte implementera ICar.Doors för att int var felstavat, se ovan.
+- CS1061, saknade metoderna CreateCar och CreateMotorcycle
+9. 
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

@@ -8,6 +8,6 @@ namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
     public interface ICar
     {
-        ínt Doors { get; set; }
+        int Doors { get; set; }
     }
 }

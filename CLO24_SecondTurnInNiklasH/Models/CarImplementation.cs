@@ -61,11 +61,11 @@ namespace CLO24_SecondTurnInNiklasH.Models
         {
             if (engineOn) // We're checking if the engine is on, to make a bit more sense and a bit more fun application
             {
-                Console.WriteLine("The car is driving...");
+                return "The car is driving...";
             }
             else
             {
-                Console.WriteLine("The engine is not on.");
+                return "The engine is not on.";
             }
         }
 
