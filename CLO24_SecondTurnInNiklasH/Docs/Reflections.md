@@ -45,6 +45,9 @@ Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela proje
 - CS1061, saknade metoderna CreateCar och CreateMotorcycle
 9. Testkör programmet:
 ![testrun_expectedresult](image.png)
+10. Det funkade bra! Så nu ville jag bara testa att printa ut Drive()-metoden med:
+![testrun_withdrivemethod](image-1.png)
+11. 
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

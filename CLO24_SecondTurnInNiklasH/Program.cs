@@ -8,30 +8,32 @@ namespace CLO24_SecondTurnInNiklasH
     {
         static void Main(string[] args)
         {
-            // Instansiera fabriker för att skapa specifika fordon
+            // Creating instances of the CarFactory and MotorcycleFactory classes
             CarFactory carFactory = new CarFactory();
             MotorcycleFactory motorcycleFactory = new MotorcycleFactory();
 
-            // Skapa en bil med hjälp av CarFactory
+            // Using CarFactory to create an object of the CarImplementation class
             CarImplementation car = carFactory.CreateCar("Toyota", "Corolla", 2020, 15000, 4);
-            Console.WriteLine(car.ToString()); // Skriver ut bilens egenskaper
-            car.StartEngine(); // Startar bilens motor
-            Console.WriteLine("Car engine status: " + (car.IsEngineOn() ? "On" : "Off")); // Kollar om motorn är på
-            car.StopEngine(); // Stänger av bilens motor
+            Console.WriteLine(car.ToString()); // This prints the car's properties to the car variable
+            car.StartEngine(); // Starting the car's engine
+            Console.WriteLine("Car engine status: " + (car.IsEngineOn() ? "On" : "Off")); // Checking if the engine is On or Off
+            Console.WriteLine(car.Drive()); // Prints the string returned from the Drive method
+            car.StopEngine(); // Turns off the engine
             Console.WriteLine("Car engine status: " + (car.IsEngineOn() ? "On" : "Off"));
-            Console.WriteLine("Car doors: " + car.Doors); // Skriver ut antalet dörrar
-            car.Doors = 5; // Ändrar antal dörrar
+            Console.WriteLine("Car doors: " + car.Doors); // Prints the number of doors
+            car.Doors = 5; // Changes the number of doors and then prints it out
             Console.WriteLine("Car doors: " + car.Doors);
 
-            // Skapa en motorcykel med hjälp av MotorcycleFactory
+            // Below we're doing the same as above, but with a motorcycle
             MotorcycleImplementation motorcycle = motorcycleFactory.CreateMotorcycle("Harley Davidson", "Sportster", 2019, 5000, "V-Twin");
-            Console.WriteLine(motorcycle.ToString()); // Skriver ut motorcykelns egenskaper
-            motorcycle.StartEngine(); // Startar motorcykelns motor
-            Console.WriteLine("Motorcycle engine status: " + (motorcycle.IsEngineOn() ? "On" : "Off")); // Kollar om motorn är på
-            motorcycle.StopEngine(); // Stänger av motorcykelns motor
+            Console.WriteLine(motorcycle.ToString());
+            motorcycle.StartEngine();
             Console.WriteLine("Motorcycle engine status: " + (motorcycle.IsEngineOn() ? "On" : "Off"));
-            Console.WriteLine("Motorcycle engine type: " + motorcycle.EngineType); // Skriver ut motortypen
-            motorcycle.EngineType = "Inline-4"; // Ändrar motortypen
+            Console.WriteLine(motorcycle.Drive());
+            motorcycle.StopEngine();
+            Console.WriteLine("Motorcycle engine status: " + (motorcycle.IsEngineOn() ? "On" : "Off"));
+            Console.WriteLine("Motorcycle engine type: " + motorcycle.EngineType);
+            motorcycle.EngineType = "Inline-4";
             Console.WriteLine("Motorcycle engine type: " + motorcycle.EngineType);
         }
     }
