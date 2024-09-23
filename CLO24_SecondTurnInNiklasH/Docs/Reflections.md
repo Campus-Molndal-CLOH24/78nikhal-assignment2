@@ -43,7 +43,8 @@ Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela proje
 - CS0246, råkade göra ett ínt istället för int!
 - CS0738, kunde inte implementera ICar.Doors för att int var felstavat, se ovan.
 - CS1061, saknade metoderna CreateCar och CreateMotorcycle
-9. 
+9. Testkör programmet:
+![testrun_expectedresult](image.png)
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

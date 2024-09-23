@@ -34,21 +34,5 @@ namespace CLO24_SecondTurnInNiklasH
             motorcycle.EngineType = "Inline-4"; // Ändrar motortypen
             Console.WriteLine("Motorcycle engine type: " + motorcycle.EngineType);
         }
-
-        // Expected output:
-        //        Toyota Corolla 2020
-        // Car engine started
-        // Car engine status: On
-        // Car engine stopped
-        // Car engine status: Off
-        // Car doors: 4
-        // Car doors: 5
-        // Harley Davidson Sportster 2019
-        // Motorcycle engine started
-        // Motorcycle engine status: On
-        // Motorcycle engine stopped
-        // Motorcycle engine status: Off
-        // Motorcycle engine type: V-Twin
-        // Motorcycle engine type: Inline-4
     }
 }
