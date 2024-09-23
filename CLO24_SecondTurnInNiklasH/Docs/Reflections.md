@@ -55,6 +55,8 @@ Steg två: Skapade mapp- och filstrukturen och började ta grundtemplates från 
 Steg tre: Satte upp en ny github-repository och initialiserade projektets mapp genom bash (git init, git remote add origin etc)
 Steg fyra: Började dokumentera i denna fil, och valde sedan att omgående brancha mitt privata repository till att göra ett internt repo inom CLO24 istället.
 Steg fem: Skapade properties och metoder i CarImpl.cs
+Steg sex: Skapade en branch, feature/creating-mechanics och började jobba i den
+Steg sju: Kopierade koden från CarImpls.cs till MotorcycleImpl.cs och modifierade den för att passa bättre till en motorcykel..
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -62,9 +64,15 @@ Steg fem: Skapade properties och metoder i CarImpl.cs
 
 ### Vilka utmaningar stötte du på under projektet?
 
+1. Den absolut första utmaningen var att jobba med färdig kod och en layout som jag inte skapat själv.
+2. Den andra utmaningen var att jag råkade skapa en copy efter jag gjorde en fork i Git, så jag hade en extra kopia av projektet nestlad inuti min mappstruktur.
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Hur löste du dessa utmaningar?
+
+1. Jag läste noga igenom dokumentationen flera gånger och skapaden en plan för implementation steg-för-steg
+2. git -ls -la och sedan rm -rf (namnetpåmappen). Det hade säkert gått lika bra att bara deletea mappen direkt i Windows, men vill ha för vana att använda Bash och CLI.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

@@ -18,7 +18,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
         // Then we implement the properties from ICar
         public int Doors { get; set; }
 
-        // We want a variable to be used in the IsEngineOn method
+        // We want a variable value to be used in the IsEngineOn method
         private bool engineOn = false;
 
         // Setting up the constructor to initialize the properties
@@ -42,7 +42,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
             if (!engineOn)
             {
                 engineOn = true;
-            Console.WriteLine("The engine started!");
+            Console.WriteLine("The cars engine started!");
             }
         }
 
@@ -51,7 +51,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
             if (engineOn)
             {
                 engineOn = false;
-                Console.WriteLine("The engine stopped.");
+                Console.WriteLine("The cars engine stopped.");
             }
         }
 
@@ -60,7 +60,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
         {
             if (engineOn) // We're checking if the engine is on, to make a bit more sense and a bit more fun application
             {
-                Console.WriteLine("The car is driving.");
+                Console.WriteLine("The car is driving...");
             }
             else
             {
