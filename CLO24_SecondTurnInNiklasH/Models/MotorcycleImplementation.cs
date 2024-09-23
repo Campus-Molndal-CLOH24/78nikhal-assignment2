@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CLO24_SecondTurnInNiklasH.Interfaces;
-using Interfaces;
 
 namespace CLO24_SecondTurnInNiklasH.Models
 {
-    public class MotorcycleImpl : IMotorcycle, IVehicle, IDriveable
+    using Interfaces;
+
+    public class MotorcycleImplementation : IMotorcycle, IVehicle, IDriveable
     {
         // We start by implementing the properties from IVehicle
         public string Brand { get; set; }
@@ -23,7 +23,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
         private bool engineOn = false;
 
         // Setting up the constructor to initialize the properties
-        public MotorcycleImpl(string brand, string model, int year, double mileage, string engineType)
+        public MotorcycleImplementation(string brand, string model, int year, double mileage, string engineType)
         {
             Brand = brand;
             Model = model;
