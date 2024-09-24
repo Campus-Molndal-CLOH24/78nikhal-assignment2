@@ -8,6 +8,7 @@ namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
     public interface ITractor
     {
-        string UtilityType { get; set; } // Defines the type of utility tool or attachment the tractor uses.
+        double Weight { get; set; } // Weight in tons
+        string UtilityTool { get; set; } // Defines the type of utility tool or attachment the tractor uses.
     }
 }

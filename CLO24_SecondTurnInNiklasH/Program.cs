@@ -32,13 +32,13 @@
             // Adding vehicles to the list
             vehicles.Add(CreateVehicle(carFactory, "Toyota", "Corolla", 2020, 15000, 4));
             vehicles.Add(CreateVehicle(motorcycleFactory, "Harley Davidson", "Sportster", 2019, 5000, "V-Twin"));
-            vehicles.Add(CreateVehicle(tractorFactory, "John Deere", "X9", 2021, 500, "Harvester"));
+            vehicles.Add(CreateVehicle(tractorFactory, "John Deere", "X9 Combine", 2021, 1200, "Harvester", 12));
             vehicles.Add(CreateVehicle(carFactory, "Ford", "Focus", 2018, 30000, 5));
             vehicles.Add(CreateVehicle(motorcycleFactory, "Yamaha", "MT-07", 2020, 8000, "Parallel Twin"));
-            vehicles.Add(CreateVehicle(tractorFactory, "Massey Ferguson", "MF 5700", 2019, 800, "Plow"));
+            vehicles.Add(CreateVehicle(tractorFactory, "Massey Ferguson", "6713", 2020, 500, "Loader", 7));
             vehicles.Add(CreateVehicle(carFactory, "Honda", "Civic", 2021, 10000, 4));
             vehicles.Add(CreateVehicle(motorcycleFactory, "Ducati", "Monster", 2022, 2000, "V-Twin"));
-            vehicles.Add(CreateVehicle(tractorFactory, "Kubota", "M7", 2020, 600, "Forklift"));
+            vehicles.Add(CreateVehicle(tractorFactory, "Kubota", "M7", 2020, 600, "Forklift", 11));
 
             return vehicles;
         }
@@ -65,6 +65,7 @@
             List<int> carDoorModifications = new List<int> { 2, 3, 4, 5 }; // Possible door counts for cars
             List<string> motorcycleEngineModifications = new List<string> { "V-Twin", "Inline-4", "Parallel Twin", "Single Cylinder" }; // Possible engine types for motorcycles
             List<string> tractorUtilityModifications = new List<string> { "Plow", "Harvester", "Forklift", "Seeder" }; // Possible utility types for tractors
+            List<double> tractorWeightModifications = new List<double> { 6, 8, 10, 12 }; // Possible Weight modifications for Tractor
 
             // Create a single Random instance for the entire process
             Random tempRandom = new Random();
@@ -94,9 +95,14 @@
                 else if (vehicle is ITractor tractor)
                 {
                     // Apply a random utility modification from the list
-                    string newUtilityType = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
-                    Console.WriteLine($"Modified Tractor Utility: {newUtilityType}"); // Display only the modified utility type
-                    tractor.UtilityType = newUtilityType; // Apply the modification
+                    string newUtilityTool = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
+                    Console.WriteLine($"Modified Tractor Utility: {newUtilityTool}"); // Display only the modified utility type
+                    tractor.UtilityTool = newUtilityTool; // Apply the modification
+
+                    // Apply a random weight modification from the list
+                    double newWeight = tractorWeightModifications[tempRandom.Next(tractorWeightModifications.Count)];
+                    Console.WriteLine($"Modified Tractor Weight: {newWeight} tons"); // Display only the modified weight
+                    tractor.Weight = newWeight; // Apply the modification
                 }
 
                 Console.WriteLine(); // Add a line break between vehicles
@@ -118,9 +124,9 @@
         }
 
         // Generic method to create a Tractor
-        private static IVehicle CreateVehicle(TractorFactory factory, string brand, string model, int year, double mileage, string utilityType) // Note: utilityType
+        private static IVehicle CreateVehicle(TractorFactory factory, string brand, string model, int year, double mileage, string utilityTool, double weight)
         {
-            return factory.CreateTractor(brand, model, year, mileage, utilityType);
+            return factory.CreateTractor(brand, model, year, mileage, utilityTool, weight);
         }
 
         // Method to display vehicle details - here we also check for car and motorcycle specific properties
@@ -148,7 +154,8 @@
             // Check for tractor-specific properties
             if (vehicle is ITractor tractor)
             {
-                Console.WriteLine($"Tractor utility type: {tractor.UtilityType}"); // Display the utility type
+                Console.WriteLine($"Tractor utility tool: {tractor.UtilityTool}"); // Display the utility tool
+                Console.WriteLine($"Tractor Weight: {tractor.Weight} tons"); // Display the weight
             }
         }
 

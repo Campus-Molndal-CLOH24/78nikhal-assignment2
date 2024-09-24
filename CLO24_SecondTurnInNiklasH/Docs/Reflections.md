@@ -100,7 +100,10 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 
 22. NÖRD DELUXE! Jag har gjort en random-shuffle-List som printar fordonen i random order.. mest för att det är kul. Ville också göra något som kanske ingen annan gör. Använde Fisher-Yates algoritm. Skälet: Jag vet hur jag gör en Random rng = new Random(), men jag ville ha en enkel algoritm som kan cykla igenom vår List av fordon. Bad ChatGPT om en lösning; den här byter plats på objekten så den går att köra som en "sorteringsalgoritm" i en egen metod! Snyggt! Har kommenterat den rad för rad i programmet om någon skulle undra vad den gör.
 
-23. 
+23. Koden komplett, vi skulle kunna lämna in det nu, men jag vill gärna visa att verktygen fungerar och skapa något annat så jag lägger till fordonet Tractor.
+- ITractor.cs, TractorImplementation.cs, TractorFactory.cs och den nödvändiga koden i Program.
+
+24. Nu får koden anses vara komplett, men vill bara visa på ytterligare en färdighet för att avsluta detta: Ville lägga till en fordons-specific metod till, så åtminstone en av dem har två. Det vore tråkigt att lägga till en generisk färg (den påverkar alla) så jag skapade vikt i ton på traktorn.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

@@ -10,24 +10,38 @@ namespace CLO24_SecondTurnInNiklasH.Models
     public class TractorImplementation : VehicleFoundation, ITractor
     {
         // Internal property with restricted access, specific to Tractor
-        protected string InternalUtilityType { get; private set; }
+        protected double InternalWeight { get; private set; } // Weight in tons
 
         // Explicit implementation of the interface to protect the property
-        string ITractor.UtilityType
+        double ITractor.Weight
         {
-            get => InternalUtilityType;
-            set => InternalUtilityType = value;
+            get => InternalWeight;
+            set => InternalWeight = value;
         }
 
         // Constructor to initialize properties, calling the base class constructor
-        public TractorImplementation(string brand, string model, int year, double mileage, string utilityType)
+        public TractorImplementation(string brand, string model, int year, double mileage, string utilityTool, double weight)
             : base(brand, model, year, mileage)
         {
             // Input validation
-            if (string.IsNullOrWhiteSpace(utilityType))
-                throw new ArgumentException("Utility type cannot be empty or null.");
+            if (string.IsNullOrWhiteSpace(utilityTool))
+                throw new ArgumentException("Utility tool cannot be empty or null.");
 
-            InternalUtilityType = utilityType;
+            if (weight <= 0)
+                throw new ArgumentException("Weight must be a positive value.");
+
+            InternalUtilityTool = utilityTool;
+            InternalWeight = weight;
+        }
+
+        // Internal property with restricted access, specific to Tractor
+        protected string InternalUtilityTool { get; private set; }
+
+        // Explicit implementation of the interface to protect the property
+        string ITractor.UtilityTool
+        {
+            get => InternalUtilityTool;
+            set => InternalUtilityTool = value;
         }
     }
 }

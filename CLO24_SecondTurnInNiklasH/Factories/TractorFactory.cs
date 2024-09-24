@@ -9,9 +9,9 @@ namespace CLO24_SecondTurnInNiklasH.Factories
     using Models;
     internal class TractorFactory
     {
-        internal TractorImplementation CreateTractor(string brand, string model, int year, double mileage, string utilityType)
+        internal TractorImplementation CreateTractor(string brand, string model, int year, double mileage, string utilityTool, double weight)
         {
-            return new TractorImplementation(brand, model, year, mileage, utilityType);
+            return new TractorImplementation(brand, model, year, mileage, utilityTool, weight);
         }
     }
 }
