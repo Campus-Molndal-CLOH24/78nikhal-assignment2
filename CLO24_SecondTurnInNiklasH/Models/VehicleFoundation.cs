@@ -15,6 +15,15 @@ namespace CLO24_SecondTurnInNiklasH.Models
         public int Year { get; set; }
         public double Mileage { get; set; }
 
+        // Constructor to initialize properties
+        public VehicleFoundation(string brand, string model, int year, double mileage)
+        {
+            Brand = brand;
+            Model = model;
+            Year = year;
+            Mileage = mileage;
+        }
+
         // Engine status property shared by all vehicles
         private bool engineOn = false;
 

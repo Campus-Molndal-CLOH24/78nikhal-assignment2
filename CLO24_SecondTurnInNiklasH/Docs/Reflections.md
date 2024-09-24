@@ -33,22 +33,40 @@ Nu kommer vi till planering/genomförande ->
 Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela projektet vs att jobba modulärt. Det är alltid önskvärt att jobba modulärt. Eftersom vi egentligen har ett större ramverk redan så valde jag att skapa alla klasser och interface först, de kan ju finnas utan kod initialt och sedan bygger vi på därifrån. Vid behov kan jag kommentera bort kod i Program/Main och sedan arbeta "modulärt" på det här sättet.
 
 1. läste igenom allt inlämningsmaterial för att få en övergripande bild
+
 2. Skapade mapp- och filstrukturen och började ta grundtemplates från materialet vi hade tillgång till. Vi hade ju punkten "Steg-för-steg-arbetsgång" så de klasserna skapade jag tidigt.
+
 3. Satte upp en ny github-repository och initialiserade projektets mapp genom bash (git init, git remote add origin etc)
+
 4. Började dokumentera i denna fil, och valde sedan att omgående brancha mitt privata repository till att göra ett internt repo inom CLO24 istället.
+
 5. Skapade properties och metoder i CarImpl.cs
+
 6. Skapade en branch, feature/creating-mechanics och började jobba i den
+
 7. Kopierade koden från CarImpls.cs till MotorcycleImpl.cs och modifierade den för att passa bättre till en motorcykel.. passade på att byta Impl till Implementation, så vi håller Clean Code så gott vi kan.
+
 8. Jag kom hit innan jag hittade den smått gömda filen project.md! Där finns steg för steg-guider som mer eller mindre visar på allt jag skrev ovanför, haha. Nu är det dags för buggfixande, jag har 6 st errors och 0 warnings. Det var följande:
 - CS0246, råkade göra ett ínt istället för int!
 - CS0738, kunde inte implementera ICar.Doors för att int var felstavat, se ovan.
 - CS1061, saknade metoderna CreateCar och CreateMotorcycle
+
 9. Testkör programmet:
 ![testrun_expectedresult](image.png)
+
 10. Det funkade bra! Så nu ville jag bara testa att printa ut Drive()-metoden med:
 ![testrun_withdrivemethod](image-1.png)
+
 11. Eftersom vi hade fyra metoder som var gemensamma så återanvände jag dem:
 IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag kallade VehicleFoundation. Det blev mycket mindre kod och mer kontroll med alla metoder i en.
+
+12. Uppdaterade Readme.md
+
+13. Nu har vi ett fungerande program som kan köra Program.cs. Vi skulle inte ändra interfacet, och det gjorde jag inte men har valt att använda VehicleFoundation, som nämns i punkt 11. Vi anropar IVehicle. Nästa steg är att se hur vi kan optimera koden utan att göra den alltför abstrakt och oläsbar! I det här läget kollar jag med ChatGPT vad den tycker om koden enligt Clean Code-principer:
+![cleancode_validation_according_to_chatgpt](image-2.png)
+- Här ger även ChatGPT ett par förslag till "förbättringar" av koden, se punkt 2 under implementeringsval!
+
+14. Clean Code: Sätter default values för att undvika null i CarImplementation och MotorcycleImplementation-konstruktorerna.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -57,7 +75,9 @@ IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag ka
 ### Vilka utmaningar stötte du på under projektet?
 
 1. Den absolut första utmaningen var att jobba med färdig kod och en layout som jag inte skapat själv.
+
 2. Den andra utmaningen var att jag råkade skapa en copy efter jag gjorde en fork i Git, så jag hade en extra kopia av projektet nestlad inuti min mappstruktur.
+
 3. När jag slog ihop fyra metoder till VehicleFoundation.cs så fick jag varningar om non-nullable-deklarationer (CS8618). De låg i properties från IVehicle när de initialiseras.
 
 --- Skriv ovanför och ta inte bort denna raden ---
@@ -65,7 +85,9 @@ IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag ka
 ### Hur löste du dessa utmaningar?
 
 1. Jag läste noga igenom dokumentationen flera gånger och skapaden en plan för implementation steg-för-steg
+
 2. git -ls -la och sedan rm -rf (namnetpåmappen). Det hade säkert gått lika bra att bara deletea mappen direkt i Windows, men vill ha för vana att använda Bash och CLI.
+
 3. Det finns två lösningar: Antingen följande
 ```cs```
 public string Brand { get; set; } = string.Empty; // Defaults to an empty string ```
@@ -74,6 +96,33 @@ Eller så löser vi det genom att skapa en konstruktor som sätter default-värd
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Beskriv några implementeringsval du gjort?
+
+1. TO DO: BESKRIV VEHICLEFOUNDATION-TANKEN HÄR
+
+2. ChatGPTs förslag till refaktorerings-optimisering:
+- Den föreslår "constructor chaining", dvs jag skapar en konstruktor i CarImplementation som kallar på klassens konstruktor. Det ger en väldigt "clean" CarImplementation:
+```cs```
+namespace CLO24_SecondTurnInNiklasH.Models
+{
+    using Interfaces;
+
+    public class CarImplementation : VehicleFoundation, ICar
+    {
+        // Property specific to Car
+        public int Doors { get; set; }
+
+        // Constructor to initialize properties, calling the base class constructor
+        public CarImplementation(string brand, string model, int year, double mileage, int doors)
+            : base(brand, model, year, mileage)
+        {
+            Doors = doors;
+        }
+
+        // Additional car-specific methods can be added here if needed
+    }
+} ```
+
+
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
