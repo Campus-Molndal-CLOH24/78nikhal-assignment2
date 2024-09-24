@@ -84,6 +84,8 @@ protected virtual string VehicleTypeName => "Vehicle";
 ```
 Detta gör att jag kan printa ut fordonstypen på ett lätt/snyggare sätt. När jag justerade ToString() i VehicleFoundation-klassen skulle jag kunnat lägga till fordonsspecifika detaljer som till exempel Door (Car) eller EngineType (Motorcycle). Det är en möjlighet att få programmet att växa där senare.
 
+19. Mergeade branchen med main. Nu har vi ett bra program som funkar med refaktorerade metoder i Main, och vi har kommit till steg 13 i project.md-filen vi jobbar efter: Polymorfism. Steg ett där är att "döda" vår Main och skapa en ny. Så jag skapar en helt ny branch för detta, då har vi kvar feature/creating-mechanics som vi kan återskapa om vi behöver. Nu gör vi feature/endgame.
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Utmaningar och lösningar
