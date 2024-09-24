@@ -8,6 +8,6 @@ namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
     public interface IMotorcycle
     {
-        string EngineType { get; set; }
+        string EngineType { get; set; } // Defines the type of engine the motorcycle uses.
     }
 }

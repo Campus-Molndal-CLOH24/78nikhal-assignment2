@@ -2,20 +2,18 @@
 {
     using Factories;
     using Interfaces;
+    using System;
 
     internal class Program
     {
         static void Main(string[] args)
         {
-            // Create a List of vehicles, and then we display their details
+            // Create a List of vehicles and display their details
             List<IVehicle> vehicles = CreateVehicleList();
 
-            // Apply randomized modifications to vehicles
-            ApplyVehicleModifications(vehicles);
-
-            // Shuffle the vehicle list and then display it
-            ShuffleList(vehicles); 
-            DisplayAllVehicles(vehicles);
+            // Shuffle the vehicle list and then display the modified vehicles
+            ShuffleList(vehicles);
+            DisplayOriginalAndModifiedVehicles(vehicles);
 
             FactoryShutdown();
         }
@@ -26,6 +24,7 @@
             // Creating vehicle instances of the vehicle classes to supply our factory classes
             CarFactory carFactory = new CarFactory();
             MotorcycleFactory motorcycleFactory = new MotorcycleFactory();
+            TractorFactory tractorFactory = new TractorFactory();
 
             // Creating a list to hold all the vehicles
             List<IVehicle> vehicles = new List<IVehicle>();
@@ -33,39 +32,15 @@
             // Adding vehicles to the list
             vehicles.Add(CreateVehicle(carFactory, "Toyota", "Corolla", 2020, 15000, 4));
             vehicles.Add(CreateVehicle(motorcycleFactory, "Harley Davidson", "Sportster", 2019, 5000, "V-Twin"));
+            vehicles.Add(CreateVehicle(tractorFactory, "John Deere", "X9", 2021, 500, "Harvester"));
             vehicles.Add(CreateVehicle(carFactory, "Ford", "Focus", 2018, 30000, 5));
             vehicles.Add(CreateVehicle(motorcycleFactory, "Yamaha", "MT-07", 2020, 8000, "Parallel Twin"));
+            vehicles.Add(CreateVehicle(tractorFactory, "Massey Ferguson", "MF 5700", 2019, 800, "Plow"));
             vehicles.Add(CreateVehicle(carFactory, "Honda", "Civic", 2021, 10000, 4));
             vehicles.Add(CreateVehicle(motorcycleFactory, "Ducati", "Monster", 2022, 2000, "V-Twin"));
+            vehicles.Add(CreateVehicle(tractorFactory, "Kubota", "M7", 2020, 600, "Forklift"));
 
             return vehicles;
-        }
-
-        // Method to apply randomized modifications to each vehicle in the list
-        private static void ApplyVehicleModifications(List<IVehicle> vehicles)
-        {
-            // Define lists of possible modifications
-            List<int> carDoorModifications = new List<int> { 2, 3, 4, 5 }; // Possible door counts for cars
-            List<string> motorcycleEngineModifications = new List<string> { "V-Twin", "Inline-4", "Parallel Twin", "Single Cylinder" }; // Possible engine types for motorcycles
-
-            // Shuffle modification lists
-            ShuffleList(carDoorModifications);
-            ShuffleList(motorcycleEngineModifications);
-
-            // Apply modifications to vehicles
-            foreach (var vehicle in vehicles)
-            {
-                if (vehicle is ICar car)
-                {
-                    // Apply a random door modification from the shuffled list
-                    car.Doors = carDoorModifications[new Random().Next(carDoorModifications.Count)];
-                }
-                else if (vehicle is IMotorcycle motorcycle)
-                {
-                    // Apply a random engine modification from the shuffled list
-                    motorcycle.EngineType = motorcycleEngineModifications[new Random().Next(motorcycleEngineModifications.Count)];
-                }
-            }
         }
 
         // Method to shuffle the list of vehicles, Fisher-Yates shuffle algorithm
@@ -83,12 +58,48 @@
             }
         }
 
-            // Method to iterate over all vehicles and display their details
-            private static void DisplayAllVehicles(List<IVehicle> vehicles)
+        // Method to display original and modified vehicle details
+        private static void DisplayOriginalAndModifiedVehicles(List<IVehicle> vehicles)
         {
+            // Define lists of possible modifications
+            List<int> carDoorModifications = new List<int> { 2, 3, 4, 5 }; // Possible door counts for cars
+            List<string> motorcycleEngineModifications = new List<string> { "V-Twin", "Inline-4", "Parallel Twin", "Single Cylinder" }; // Possible engine types for motorcycles
+            List<string> tractorUtilityModifications = new List<string> { "Plow", "Harvester", "Forklift", "Seeder" }; // Possible utility types for tractors
+
+            // Create a single Random instance for the entire process
+            Random tempRandom = new Random();
+
+            // Display original and modified details
             foreach (var vehicle in vehicles)
             {
+                // Display original details
+                Console.WriteLine("Original Vehicle Details:");
                 DisplayVehicleDetails(vehicle);
+
+                // Apply modifications based on vehicle type
+                if (vehicle is ICar car)
+                {
+                    // Apply a random door modification from the list
+                    int newDoors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
+                    Console.WriteLine($"Modified Car Doors: {newDoors}"); // Display only the modified doors
+                    car.Doors = newDoors; // Apply the modification
+                }
+                else if (vehicle is IMotorcycle motorcycle)
+                {
+                    // Apply a random engine modification from the list
+                    string newEngineType = motorcycleEngineModifications[tempRandom.Next(motorcycleEngineModifications.Count)];
+                    Console.WriteLine($"Modified Motorcycle Engine Type: {newEngineType}"); // Display only the modified engine type
+                    motorcycle.EngineType = newEngineType; // Apply the modification
+                }
+                else if (vehicle is ITractor tractor)
+                {
+                    // Apply a random utility modification from the list
+                    string newUtilityType = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
+                    Console.WriteLine($"Modified Tractor Utility: {newUtilityType}"); // Display only the modified utility type
+                    tractor.UtilityType = newUtilityType; // Apply the modification
+                }
+
+                Console.WriteLine(); // Add a line break between vehicles
             }
         }
 
@@ -106,6 +117,12 @@
             return factory.CreateMotorcycle(brand, model, year, mileage, engineType);
         }
 
+        // Generic method to create a Tractor
+        private static IVehicle CreateVehicle(TractorFactory factory, string brand, string model, int year, double mileage, string utilityType) // Note: utilityType
+        {
+            return factory.CreateTractor(brand, model, year, mileage, utilityType);
+        }
+
         // Method to display vehicle details - here we also check for car and motorcycle specific properties
         private static void DisplayVehicleDetails(IVehicle vehicle)
         {
@@ -119,17 +136,19 @@
             // Check for car-specific properties
             if (vehicle is ICar car)
             {
-                Console.WriteLine("Car doors: " + car.Doors);
-                car.Doors = 5; // Modify the number of doors
-                Console.WriteLine($"Car doors (modified): {car.Doors}\n");
+                Console.WriteLine($"Car doors: {car.Doors}"); // Display the modified number of doors
             }
 
             // Check for motorcycle-specific properties
             if (vehicle is IMotorcycle motorcycle)
             {
-                Console.WriteLine("Motorcycle engine type: " + motorcycle.EngineType);
-                motorcycle.EngineType = "Inline-4"; // Modify the engine type
-                Console.WriteLine($"Motorcycle engine type (modified): {motorcycle.EngineType}\n");
+                Console.WriteLine($"Motorcycle engine type: {motorcycle.EngineType}"); // Display the modified engine type
+            }
+
+            // Check for tractor-specific properties
+            if (vehicle is ITractor tractor)
+            {
+                Console.WriteLine($"Tractor utility type: {tractor.UtilityType}"); // Display the utility type
             }
         }
 

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
-    public interface ICar
+    public interface ITractor
     {
-        int Doors { get; set; } // Defines how many doors the car has.
+        string UtilityType { get; set; } // Defines the type of utility tool or attachment the tractor uses.
     }
 }

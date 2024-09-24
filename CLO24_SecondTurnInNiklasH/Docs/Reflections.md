@@ -120,6 +120,8 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 
 6. Noterade att "modify"-linjen på doors/engine är statisk. Vi kan använda en sträng för vehicles och sedan genom faktory-metoden göra skillnad på bil/mc/etc, men modify-strängen ligger som en separat repeterad kodsträng, och t ex så blir alla modifierade dörrar 5 st och alla modifierade motorer Inline-4..
 
+7. Följdproblem på ovanstående: Koden ger inga felmeddelanden men den slumpar ändå inte fram en modifikation.
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Hur löste du dessa utmaningar?
@@ -149,6 +151,14 @@ Men dels så blir det väldigt grötigt i Main (inte särskilt Clean Code!), del
 - Lösningen till slut!
 Jag skapade metoden ApplyVehicleModifications, det är två statiska listor (door modification har 2, 3, 4, 5 dörrar och engine har fyra olika motoralternativ).
 - Den återanvänder koden från ShuffleList! Mycket nöjd!
+
+7. Bytte ut följande kod med koden nedanför:
+```cs
+car.Doors = carDoorModifications[new Random().Next(carDoorModifications.Count)];
+// Ny kod nedanför
+car.Doors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
+```
+- Skillnaden är att vi skapar en separat ny random-instans för varje gång vi randomiserar koden, det kan ställa till det när vi kör ShuffleList simultant. Tog även bort den hardkodade default-värdet som jag satt i DisplayVehicleDetails. Dels skriver den över det slumpade värdet, dels så är den överflödig för vi slumpar ändå fram ett värde till variabeln..
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
