@@ -98,7 +98,9 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 
 21. Skapar dokumentet factorystructure.sql och bifogar i Docs-foldern. Fick hjälp av ChatGPT.
 
-22. NÖRD DELUXE! Jag har gjort en random-shuffle-List som printar fordonen i random order.. mest för att det är kul. Ville också göra något som kanske ingen annan gör. Använde Fisher-Yates algoritm. Skälet: Jag vet hur jag gör en Random rng = new Random(), men jag ville ha en enkel algoritm som kan cykla igenom vår List av fordon. Bad ChatGPT om en lösning; den här byter plats på objekten så den går att köra som en "sorteringsalgoritm" i en egen metod!
+22. NÖRD DELUXE! Jag har gjort en random-shuffle-List som printar fordonen i random order.. mest för att det är kul. Ville också göra något som kanske ingen annan gör. Använde Fisher-Yates algoritm. Skälet: Jag vet hur jag gör en Random rng = new Random(), men jag ville ha en enkel algoritm som kan cykla igenom vår List av fordon. Bad ChatGPT om en lösning; den här byter plats på objekten så den går att köra som en "sorteringsalgoritm" i en egen metod! Snyggt! Har kommenterat den rad för rad i programmet om någon skulle undra vad den gör.
+
+23. 
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -114,7 +116,9 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 
 4. Ny instans av Brand, Model etc. Detta skapar följproblem i formen av: Vi kan inte fritt använda Ctrl+R och byta namn på alla, vi har ju nästlat in originalvariabeln bakom skydd, men här är felkodsrutan och/eller ChatGPT väldigt väldigt bra hjälpmedel.
 
-5. Följproblem av ovan instansiering: Nu när vi inte Drive()-metoden. 
+5. Följproblem av ovan instansiering: Nu när vi inte Drive()-metoden.
+
+6. Noterade att "modify"-linjen på doors/engine är statisk. Vi kan använda en sträng för vehicles och sedan genom faktory-metoden göra skillnad på bil/mc/etc, men modify-strängen ligger som en separat repeterad kodsträng, och t ex så blir alla modifierade dörrar 5 st och alla modifierade motorer Inline-4..
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -137,6 +141,14 @@ Eller så löser vi det genom att skapa en konstruktor som sätter default-värd
 IDriveable driveableCar = (IDriveable)car;
 ```
 Men dels så blir det väldigt grötigt i Main (inte särskilt Clean Code!), dels fanns det en enklare lösning: Vi extendar IVehicle från public interface IVehicle till public interface IVehicle : IDriveable.
+
+6. Jag ser flera lösningar:
+- Specifik modifikation: för varje fordon direkt i Program-klassen när fordonet skapas. Nackdel: Det blir repetativt om vi har många fordon.
+- Randomiserad modifikation: Skapa en List för Door, en för EngineType, etc, och välj ett randomiserat värde från listan. Dynamiskt och intressanta variationer. Nackdel: Inte särskilt realistiskt kanske om en 100cc-MC får en Honda CBX 6-cylindrig motor..
+- En kul grej? Vore om vi kunde återanvända ShuffleList, vi har redan den i Program för att randomisera vilken ordning vi presenterar fordonen. Kan vi använda även till detta? Träna på återanvända kod?
+- Lösningen till slut!
+Jag skapade metoden ApplyVehicleModifications, det är två statiska listor (door modification har 2, 3, 4, 5 dörrar och engine har fyra olika motoralternativ).
+- Den återanvänder koden från ShuffleList! Mycket nöjd!
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

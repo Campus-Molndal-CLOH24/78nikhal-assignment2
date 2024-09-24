@@ -9,13 +9,15 @@
         {
             // Create a List of vehicles, and then we display their details
             List<IVehicle> vehicles = CreateVehicleList();
-            ShuffleList(vehicles); // Shuffle the vehicle list before displaying :) it is a bit more fun alternating the order
+
+            // Apply randomized modifications to vehicles
+            ApplyVehicleModifications(vehicles);
+
+            // Shuffle the vehicle list and then display it
+            ShuffleList(vehicles); 
             DisplayAllVehicles(vehicles);
 
-            // Take a key input to exit the program, it is a bit more user friendly than just closing the console window
-            Console.WriteLine("Press play on tape (press any key)");
-            Console.ReadKey();
-            Environment.Exit(0);
+            FactoryShutdown();
         }
 
         // Method to create a list of vehicles
@@ -37,6 +39,33 @@
             vehicles.Add(CreateVehicle(motorcycleFactory, "Ducati", "Monster", 2022, 2000, "V-Twin"));
 
             return vehicles;
+        }
+
+        // Method to apply randomized modifications to each vehicle in the list
+        private static void ApplyVehicleModifications(List<IVehicle> vehicles)
+        {
+            // Define lists of possible modifications
+            List<int> carDoorModifications = new List<int> { 2, 3, 4, 5 }; // Possible door counts for cars
+            List<string> motorcycleEngineModifications = new List<string> { "V-Twin", "Inline-4", "Parallel Twin", "Single Cylinder" }; // Possible engine types for motorcycles
+
+            // Shuffle modification lists
+            ShuffleList(carDoorModifications);
+            ShuffleList(motorcycleEngineModifications);
+
+            // Apply modifications to vehicles
+            foreach (var vehicle in vehicles)
+            {
+                if (vehicle is ICar car)
+                {
+                    // Apply a random door modification from the shuffled list
+                    car.Doors = carDoorModifications[new Random().Next(carDoorModifications.Count)];
+                }
+                else if (vehicle is IMotorcycle motorcycle)
+                {
+                    // Apply a random engine modification from the shuffled list
+                    motorcycle.EngineType = motorcycleEngineModifications[new Random().Next(motorcycleEngineModifications.Count)];
+                }
+            }
         }
 
         // Method to shuffle the list of vehicles, Fisher-Yates shuffle algorithm
@@ -102,6 +131,14 @@
                 motorcycle.EngineType = "Inline-4"; // Modify the engine type
                 Console.WriteLine($"Motorcycle engine type (modified): {motorcycle.EngineType}\n");
             }
+        }
+
+        private static void FactoryShutdown()
+        {
+            // Take a key input to exit the program, it is a bit more user friendly than just closing the console window
+            Console.WriteLine("Press play on tape (press any key)");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
 }
