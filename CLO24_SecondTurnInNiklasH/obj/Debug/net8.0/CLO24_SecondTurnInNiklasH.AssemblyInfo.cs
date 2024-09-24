@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CLO24_SecondTurnInNiklasH")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b003cf0ca4ae15fb4d398e11a3ecd107af5d784")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0b727d0668d5f3ecba82f32d74879859ed37f010")]
 [assembly: System.Reflection.AssemblyProductAttribute("CLO24_SecondTurnInNiklasH")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CLO24_SecondTurnInNiklasH")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

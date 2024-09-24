@@ -86,6 +86,20 @@ Detta gör att jag kan printa ut fordonstypen på ett lätt/snyggare sätt. När
 
 19. Mergeade branchen med main. Nu har vi ett bra program som funkar med refaktorerade metoder i Main, och vi har kommit till steg 13 i project.md-filen vi jobbar efter: Polymorfism. Steg ett där är att "döda" vår Main och skapa en ny. Så jag skapar en helt ny branch för detta, då har vi kvar feature/creating-mechanics som vi kan återskapa om vi behöver. Nu gör vi feature/endgame.
 
+20. Det här är en större punkt eftersom det är en partiell re-write av Program.cs. Jag skriver ner de justeringar jag gjort nedan:
+- Skapar metoden CreateVehicleList: här lägger vi till fordon
+- Skapade en List som använder information i IVehicle och tar emot vehicles.Add
+- Skapar metoden DisplayAllVehicles(vehicles) som skriver ut ovanstående lista
+- Sedan kommer Fabriken:
+IVehicle CreateVehicle(CarFactory, bilspecifika parametrar)
+IVehicle CreateVehicle(MotorcycleFactory, motorcykelspecifika parametrar) etc
+Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller Bus.
+- Skapar metoden DisplayVehicleDetails: skriver ut till konsollen
+
+21. Skapar dokumentet factorystructure.sql och bifogar i Docs-foldern. Fick hjälp av ChatGPT.
+
+22. NÖRD DELUXE! Jag har gjort en random-shuffle-List som printar fordonen i random order.. mest för att det är kul. Ville också göra något som kanske ingen annan gör. Använde Fisher-Yates algoritm. Skälet: Jag vet hur jag gör en Random rng = new Random(), men jag ville ha en enkel algoritm som kan cykla igenom vår List av fordon. Bad ChatGPT om en lösning; den här byter plats på objekten så den går att köra som en "sorteringsalgoritm" i en egen metod!
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Utmaningar och lösningar
