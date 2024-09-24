@@ -15,6 +15,9 @@ namespace CLO24_SecondTurnInNiklasH.Models
         protected int InternalYear { get; private set; }
         protected double InternalMileage { get; private set; }
 
+        // Property to provide a more user-friendly type name
+        protected virtual string VehicleTypeName => "Vehicle";
+
         // Explicit interface implementation to make the properties read-only externally. Extreme security, but shows how it can be done.
         string IVehicle.Brand
         {
@@ -60,7 +63,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
             if (!engineOn)
             {
                 engineOn = true;
-                Console.WriteLine($"{GetType().Name} engine started!");
+                Console.WriteLine($"{VehicleTypeName} engine started!");
             }
         }
 
@@ -69,7 +72,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
             if (engineOn)
             {
                 engineOn = false;
-                Console.WriteLine($"{GetType().Name} engine stopped.");
+                Console.WriteLine($"{VehicleTypeName} engine stopped.");
             }
         }
 
@@ -78,7 +81,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
         {
             if (engineOn)
             {
-                return $"{GetType().Name} is driving...";
+                return $"{VehicleTypeName} is driving...";
             }
             else
             {
@@ -89,7 +92,8 @@ namespace CLO24_SecondTurnInNiklasH.Models
         // Overriding ToString to display vehicle details
         public override string ToString()
         {
-            return $"{InternalBrand} {InternalModel} {InternalYear}";
+            return $"Brand: {InternalBrand}, Model: {InternalModel}, Year: {InternalYear}, Mileage: {InternalMileage:N0} km";
+            // the :NO formatting displays the number with thousands separators, i.e. 15,000 instead of 15000
         }
     }
 }

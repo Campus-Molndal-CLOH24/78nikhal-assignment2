@@ -20,6 +20,9 @@ namespace CLO24_SecondTurnInNiklasH.Models
             set => InternalDoors = value;
         }
 
+        // Override the VehicleTypeName property to return a user-friendly type name
+        protected override string VehicleTypeName => "Car";
+
         // Constructor to initialize properties, calling the base class constructor
         public CarImplementation(string brand, string model, int year, double mileage, int doors)
             : base(brand, model, year, mileage)

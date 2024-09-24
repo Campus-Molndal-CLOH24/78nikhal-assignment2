@@ -73,6 +73,16 @@ IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag ka
 16. Inkapsling B: Det här blir ett rejält ingrepp i koden! Jag vill göra alla properties private set, så de inte kan modifieras utifrån. För att kunna göra dem "private set" samtidigt som jag jobbar med interface så skapar vi ett mellansteg där Brand, Model, Year, Mileage får bli InternalBrand, etc. I konstruktorn VehicleFoundation så gör vi sedan InternalBrand = brand, etc.
 - Som en följd av detta behöver vi även justera koden på rätt många ställen: Brand får heta InternalBrand, etc. Se utmaningar punkt 4.
 
+17. Refaktorering av Main: Vi gör flera funktioner för varje fordon vi printar, det går att bryta ner i metoder för att hålla Program/Main mer ren. Skapade metoderna:
+- CreateAndDisplayVehicles: Skapar instanserna och kör metoderna för att skapa fordon
+- CreateVehicle: Skapar fordon
+- DisplayVehicleDetails: Printar ut informationen om varje fordon
+
+18. Skapade VehicleTypeName i VehicleFoundation. La till raden nedan i Car/Motorcycle där de justerar Vehicle till Car eller Motorcycle.
+```cs
+protected virtual string VehicleTypeName => "Vehicle";
+```
+Detta gör att jag kan printa ut fordonstypen på ett lätt/snyggare sätt. När jag justerade ToString() i VehicleFoundation-klassen skulle jag kunnat lägga till fordonsspecifika detaljer som till exempel Door (Car) eller EngineType (Motorcycle). Det är en möjlighet att få programmet att växa där senare.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

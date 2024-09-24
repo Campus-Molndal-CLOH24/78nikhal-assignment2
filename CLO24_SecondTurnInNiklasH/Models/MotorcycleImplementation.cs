@@ -20,6 +20,9 @@ namespace CLO24_SecondTurnInNiklasH.Models
             set => InternalEngineType = value;
         }
 
+        // Override the VehicleTypeName property to return a user-friendly type name
+        protected override string VehicleTypeName => "Motorcycle";
+
         // Setting up the constructor to initialize the properties
         public MotorcycleImplementation(string brand, string model, int year, double mileage, string engineType) : base(brand, model, year, mileage)
         // Input validation
