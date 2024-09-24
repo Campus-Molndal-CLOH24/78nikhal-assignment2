@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
-    public interface IVehicle
+    public interface IVehicle : IDriveable
     {
         string Brand { get; set; }
         string Model { get; set; }

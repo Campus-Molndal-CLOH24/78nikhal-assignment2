@@ -68,6 +68,12 @@ IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag ka
 
 14. Clean Code: Sätter default values för att undvika null i CarImplementation och MotorcycleImplementation-konstruktorerna.
 
+15. Inkapsling A: Konstruktorn VehicleFoundation public -> protected. Klasserna MotorcycleFactory och CarFactory var redan internal, men satte även metoderna där internal.
+
+16. Inkapsling B: Det här blir ett rejält ingrepp i koden! Jag vill göra alla properties private set, så de inte kan modifieras utifrån. För att kunna göra dem "private set" samtidigt som jag jobbar med interface så skapar vi ett mellansteg där Brand, Model, Year, Mileage får bli InternalBrand, etc. I konstruktorn VehicleFoundation så gör vi sedan InternalBrand = brand, etc.
+- Som en följd av detta behöver vi även justera koden på rätt många ställen: Brand får heta InternalBrand, etc. Se utmaningar punkt 4.
+
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Utmaningar och lösningar
@@ -80,6 +86,10 @@ IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag ka
 
 3. När jag slog ihop fyra metoder till VehicleFoundation.cs så fick jag varningar om non-nullable-deklarationer (CS8618). De låg i properties från IVehicle när de initialiseras.
 
+4. Ny instans av Brand, Model etc. Detta skapar följproblem i formen av: Vi kan inte fritt använda Ctrl+R och byta namn på alla, vi har ju nästlat in originalvariabeln bakom skydd, men här är felkodsrutan och/eller ChatGPT väldigt väldigt bra hjälpmedel.
+
+5. Följproblem av ovan instansiering: Nu när vi inte Drive()-metoden. 
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Hur löste du dessa utmaningar?
@@ -89,9 +99,18 @@ IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag ka
 2. git -ls -la och sedan rm -rf (namnetpåmappen). Det hade säkert gått lika bra att bara deletea mappen direkt i Windows, men vill ha för vana att använda Bash och CLI.
 
 3. Det finns två lösningar: Antingen följande
-```cs```
-public string Brand { get; set; } = string.Empty; // Defaults to an empty string ```
+```cs
+public string Brand { get; set; } = string.Empty; // Defaults to an empty string 
+```
 Eller så löser vi det genom att skapa en konstruktor som sätter default-värden för Brand, Model, Year och Mileage (det gör vi i M- och CarImplementation.cs idag). string.Empty är en enkel lösning, det endra gör mindre återanvändning av kod men den blir svårare att läsa och jobbigare om vi skall in och pilla i koden. Jag väljer string.Empty-lösningen!
+
+4. Jag fick 15 errors bara av denna lilla justering, men kopierade/klistrade hela felkodsrutan och frågade bara ChatGPT var jag behöver justera namnen på grund av den nya instansieringen. Ett annat alternativ hade varit att klicka varje felkod för att komma till rätt kod och justera den vägen.
+
+5. Det går att instansiera den i Program/Main, exempelvis:
+```cs
+IDriveable driveableCar = (IDriveable)car;
+```
+Men dels så blir det väldigt grötigt i Main (inte särskilt Clean Code!), dels fanns det en enklare lösning: Vi extendar IVehicle från public interface IVehicle till public interface IVehicle : IDriveable.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -101,7 +120,7 @@ Eller så löser vi det genom att skapa en konstruktor som sätter default-värd
 
 2. ChatGPTs förslag till refaktorerings-optimisering:
 - Den föreslår "constructor chaining", dvs jag skapar en konstruktor i CarImplementation som kallar på klassens konstruktor. Det ger en väldigt "clean" CarImplementation:
-```cs```
+```cs
 namespace CLO24_SecondTurnInNiklasH.Models
 {
     using Interfaces;

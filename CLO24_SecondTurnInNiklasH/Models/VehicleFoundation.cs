@@ -10,18 +10,40 @@ namespace CLO24_SecondTurnInNiklasH.Models
     public abstract class VehicleFoundation : IVehicle, IDriveable
     {
         // Properties from IVehicle
-        public string Brand { get; set; } = string.Empty; // Defaults to an empty string
-        public string Model { get; set; } = string.Empty;
-        public int Year { get; set; }
-        public double Mileage { get; set; }
+        protected string InternalBrand { get; private set; } = string.Empty; // Defaults to an empty string
+        protected string InternalModel { get; private set; } = string.Empty;
+        protected int InternalYear { get; private set; }
+        protected double InternalMileage { get; private set; }
 
-        // Constructor to initialize properties
-        public VehicleFoundation(string brand, string model, int year, double mileage)
+        // Explicit interface implementation to make the properties read-only externally. Extreme security, but shows how it can be done.
+        string IVehicle.Brand
         {
-            Brand = brand;
-            Model = model;
-            Year = year;
-            Mileage = mileage;
+            get => InternalBrand;
+            set => InternalBrand = value;
+        }
+        string IVehicle.Model
+        {
+            get => InternalModel;
+            set => InternalModel = value;
+        }
+        int IVehicle.Year
+        {
+            get => InternalYear;
+            set => InternalYear = value;
+        }
+        double IVehicle.Mileage
+        {
+            get => InternalMileage;
+            set => InternalMileage = value;
+        }
+
+        // Constructor to initialize internal properties
+        protected VehicleFoundation(string brand, string model, int year, double mileage)
+        {
+            InternalBrand = brand;
+            InternalModel = model;
+            InternalYear = year;
+            InternalMileage = mileage;
         }
 
         // Engine status property shared by all vehicles
@@ -67,7 +89,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
         // Overriding ToString to display vehicle details
         public override string ToString()
         {
-            return $"{Brand} {Model} {Year}";
+            return $"{InternalBrand} {InternalModel} {InternalYear}";
         }
     }
 }

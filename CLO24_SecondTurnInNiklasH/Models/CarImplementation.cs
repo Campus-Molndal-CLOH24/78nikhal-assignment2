@@ -10,27 +10,27 @@ namespace CLO24_SecondTurnInNiklasH.Models
 
     public class CarImplementation : VehicleFoundation, ICar
     {
-        // Property specific to Car
-        public int Doors { get; set; }
+        // Internal property with restricted access, property specific to Car
+        protected int InternalDoors { get; private set; }
+
+        // Explicit implementation of the interface to protect the property
+        int ICar.Doors
+        {
+            get => InternalDoors;
+            set => InternalDoors = value;
+        }
 
         // Constructor to initialize properties, calling the base class constructor
         public CarImplementation(string brand, string model, int year, double mileage, int doors)
             : base(brand, model, year, mileage)
-        { // Below section is a simple validation of the input parameters, if they are not they set a default value
-            if (string.IsNullOrWhiteSpace(brand))
-                throw new ArgumentException("Brand cannot be empty or null.");
-            if (string.IsNullOrWhiteSpace(model))
-                throw new ArgumentException("Model cannot be empty or null.");
-            if (year <= 0)
-                throw new ArgumentException("Year must be a positive integer.");
-            if (mileage < 0)
-                throw new ArgumentException("Mileage cannot be negative.");
+        // Input validation
+        {
             if (doors <= 0)
                 throw new ArgumentException("Doors must be a positive integer.");
 
-            Doors = doors;
+            InternalDoors = doors;
         }
 
-        // Additional car-specific methods can be added here if needed
+        // TO DO: Additional car-specific methods can be added here if needed
     }
 }
