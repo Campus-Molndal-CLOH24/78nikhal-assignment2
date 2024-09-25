@@ -1,9 +1,6 @@
-Namn: [Niklas Häll]
+Namn: [ Niklas Häll ]
 
 # Inlämningsrapport
-
-Information
-OBS!!! ändra absolut inte på rubrikerna i denna fil!!!!
 
 ## Inledning
 
@@ -32,17 +29,17 @@ Nu kommer vi till planering/genomförande ->
 
 Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela projektet vs att jobba modulärt. Det är alltid önskvärt att jobba modulärt. Eftersom vi egentligen har ett större ramverk redan så valde jag att skapa alla klasser och interface först, de kan ju finnas utan kod initialt och sedan bygger vi på därifrån. Vid behov kan jag kommentera bort kod i Program/Main och sedan arbeta "modulärt" på det här sättet.
 
-1. läste igenom allt inlämningsmaterial för att få en övergripande bild
+1. läste igenom allt inlämningsmaterial för att få en övergripande bild.
 
 2. Skapade mapp- och filstrukturen och började ta grundtemplates från materialet vi hade tillgång till. Vi hade ju punkten "Steg-för-steg-arbetsgång" så de klasserna skapade jag tidigt.
 
-3. Satte upp en ny github-repository och initialiserade projektets mapp genom bash (git init, git remote add origin etc)
+3. Satte upp en ny github-repository och initialiserade projektets mapp genom bash (git init, git remote add origin etc).
 
 4. Började dokumentera i denna fil, och valde sedan att omgående brancha mitt privata repository till att göra ett internt repo inom CLO24 istället.
 
 5. Skapade properties och metoder i CarImpl.cs
 
-6. Skapade en branch, feature/creating-mechanics och började jobba i den
+6. Skapade en branch, feature/creating-mechanics och började jobba i den.
 
 7. Kopierade koden från CarImpls.cs till MotorcycleImpl.cs och modifierade den för att passa bättre till en motorcykel.. passade på att byta Impl till Implementation, så vi håller Clean Code så gott vi kan.
 
@@ -51,14 +48,13 @@ Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela proje
 - CS0738, kunde inte implementera ICar.Doors för att int var felstavat, se ovan.
 - CS1061, saknade metoderna CreateCar och CreateMotorcycle
 
-9. Testkör programmet:
-![testrun_expectedresult](image.png)
+9. Testkör programmet: Det funkade bra!
 
-10. Det funkade bra! Så nu ville jag bara testa att printa ut Drive()-metoden med:
+10. Så nu ville jag bara testa att printa ut Drive()-metoden med:
 ![testrun_withdrivemethod](image-1.png)
 
 11. Eftersom vi hade fyra metoder som var gemensamma så återanvände jag dem:
-IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag kallade VehicleFoundation. Det blev mycket mindre kod och mer kontroll med alla metoder i en.
+IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag kallade VehicleFoundation. Det blev mycket mindre kod, mer kontroll med alla metoder i en, och följer Clean Code.
 
 12. Uppdaterade Readme.md
 
