@@ -59,6 +59,7 @@ IsEngineOn, StartEngine, StopEngine, Drive. De samlade jag i en klass som jag ka
 12. Uppdaterade Readme.md
 
 13. Nu har vi ett fungerande program som kan köra Program.cs. Vi skulle inte ändra interfacet, och det gjorde jag inte men har valt att använda VehicleFoundation, som nämns i punkt 11. Vi anropar IVehicle. Nästa steg är att se hur vi kan optimera koden utan att göra den alltför abstrakt och oläsbar! I det här läget kollar jag med ChatGPT vad den tycker om koden enligt Clean Code-principer:
+
 ![cleancode_validation_according_to_chatgpt](image-2.png)
 - Här ger även ChatGPT ett par förslag till "förbättringar" av koden, se punkt 2 under implementeringsval!
 
@@ -80,7 +81,7 @@ protected virtual string VehicleTypeName => "Vehicle";
 ```
 Detta gör att jag kan printa ut fordonstypen på ett lätt/snyggare sätt. När jag justerade ToString() i VehicleFoundation-klassen skulle jag kunnat lägga till fordonsspecifika detaljer som till exempel Door (Car) eller EngineType (Motorcycle). Det är en möjlighet att få programmet att växa där senare.
 
-19. Mergeade branchen med main. Nu har vi ett bra program som funkar med refaktorerade metoder i Main, och vi har kommit till steg 13 i project.md-filen vi jobbar efter: Polymorfism. Steg ett där är att "döda" vår Main och skapa en ny. Så jag skapar en helt ny branch för detta, då har vi kvar feature/creating-mechanics som vi kan återskapa om vi behöver. Nu gör vi feature/endgame.
+19. Mergeade branchen med main. Nu har vi ett bra program som funkar med refaktorerade metoder i Main, och vi har kommit till steg 13 i project.md-filen vi jobbar efter: Polymorfism. Steg ett där är att "döda" vår Main och skapa en ny. Så jag skapar en helt ny branch för detta, då har vi kvar branchen feature/creating-mechanics som vi kan återskapa om vi behöver. Nu gör vi branchen feature/endgame
 
 20. Det här är en större punkt eftersom det är en partiell re-write av Program.cs. Jag skriver ner de justeringar jag gjort nedan:
 - Skapar metoden CreateVehicleList: här lägger vi till fordon
@@ -92,7 +93,9 @@ IVehicle CreateVehicle(MotorcycleFactory, motorcykelspecifika parametrar) etc
 Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller Bus.
 - Skapar metoden DisplayVehicleDetails: skriver ut till konsollen
 
-21. Skapar dokumentet factorystructure.sql och bifogar i Docs-foldern. Fick hjälp av ChatGPT.
+21. Skapar dokumentet factorystructure.sql och bifogar i Docs-foldern. Fick hjälp av ChatGPT. Infogar den här:
+
+![factory_chart](factorystructure.png)
 
 22. NÖRD DELUXE! Jag har gjort en random-shuffle-List som printar fordonen i random order.. mest för att det är kul. Ville också göra något som kanske ingen annan gör. Använde Fisher-Yates algoritm. Skälet: Jag vet hur jag gör en Random rng = new Random(), men jag ville ha en enkel algoritm som kan cykla igenom vår List av fordon. Bad ChatGPT om en lösning; den här byter plats på objekten så den går att köra som en "sorteringsalgoritm" i en egen metod! Snyggt! Har kommenterat den rad för rad i programmet om någon skulle undra vad den gör.
 
@@ -100,6 +103,8 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 - ITractor.cs, TractorImplementation.cs, TractorFactory.cs och den nödvändiga koden i Program.
 
 24. Nu får koden anses vara komplett, men vill bara visa på ytterligare en färdighet för att avsluta detta: Ville lägga till en fordons-specific metod till, så åtminstone en av dem har två. Det vore tråkigt att lägga till en generisk färg (den påverkar alla) så jag skapade vikt i ton på traktorn.
+
+25. Går igenom Reflections.md och kommentarerna i programmet. Städar upp inför inlämning.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
