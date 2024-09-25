@@ -112,17 +112,17 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 
 ### Vilka utmaningar stötte du på under projektet?
 
-1. Den absolut första utmaningen var att jobba med färdig kod och en layout som jag inte skapat själv.
+1. Den absolut första utmaningen var att jobba med (halv-)färdig kod och en layout som jag inte skapat själv.
 
 2. Den andra utmaningen var att jag råkade skapa en copy efter jag gjorde en fork i Git, så jag hade en extra kopia av projektet nestlad inuti min mappstruktur.
 
 3. När jag slog ihop fyra metoder till VehicleFoundation.cs så fick jag varningar om non-nullable-deklarationer (CS8618). De låg i properties från IVehicle när de initialiseras.
 
-4. Ny instans av Brand, Model etc. Detta skapar följproblem i formen av: Vi kan inte fritt använda Ctrl+R och byta namn på alla, vi har ju nästlat in originalvariabeln bakom skydd, men här är felkodsrutan och/eller ChatGPT väldigt väldigt bra hjälpmedel.
+4. Ny instans av Brand, Model etc. Detta skapar följproblem i formen av att: Vi kan inte fritt använda Ctrl+R och byta namn på alla, vi har ju nästlat in originalvariabeln bakom skydd, men här är felkodsrutan och/eller ChatGPT väldigt väldigt bra hjälpmedel.
 
 5. Följproblem av ovan instansiering: Nu när vi inte Drive()-metoden.
 
-6. Noterade att "modify"-linjen på doors/engine är statisk. Vi kan använda en sträng för vehicles och sedan genom faktory-metoden göra skillnad på bil/mc/etc, men modify-strängen ligger som en separat repeterad kodsträng, och t ex så blir alla modifierade dörrar 5 st och alla modifierade motorer Inline-4..
+6. Noterade att "modify"-linjen på doors/engine är statisk. Modify-strängen ligger som en separat repeterad kodsträng! Alla modifierade dörrar blir 5 st och alla modifierade motorer Inline-4..
 
 7. Följdproblem på ovanstående: Koden ger inga felmeddelanden men den slumpar ändå inte fram en modifikation.
 
@@ -138,15 +138,16 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 ```cs
 public string Brand { get; set; } = string.Empty; // Defaults to an empty string 
 ```
-Eller så löser vi det genom att skapa en konstruktor som sätter default-värden för Brand, Model, Year och Mileage (det gör vi i M- och CarImplementation.cs idag). string.Empty är en enkel lösning, det endra gör mindre återanvändning av kod men den blir svårare att läsa och jobbigare om vi skall in och pilla i koden. Jag väljer string.Empty-lösningen!
+Eller så löser vi det genom att skapa en konstruktor som sätter default-värden för Brand, Model, Year och Mileage (det gör vi i Motorcycle- och CarImplementation.cs idag).
+string.Empty är en enkel lösning, den senare lösningen gör koden lättare att återanvända, men den blir svårare att läsa och jobbigare om vi skall in och pilla i koden. Jag väljer string.Empty-lösningen!
 
 4. Jag fick 15 errors bara av denna lilla justering, men kopierade/klistrade hela felkodsrutan och frågade bara ChatGPT var jag behöver justera namnen på grund av den nya instansieringen. Ett annat alternativ hade varit att klicka varje felkod för att komma till rätt kod och justera den vägen.
 
-5. Det går att instansiera den i Program/Main, exempelvis:
+5. Det går att instansiera den i Program/Main, genom att exempelvis köra följande:
 ```cs
 IDriveable driveableCar = (IDriveable)car;
 ```
-Men dels så blir det väldigt grötigt i Main (inte särskilt Clean Code!), dels fanns det en enklare lösning: Vi extendar IVehicle från public interface IVehicle till public interface IVehicle : IDriveable.
+Dels blir det väldigt grötigt i Main (inte särskilt Clean Code!), dels fanns det en enklare lösning: Vi extendar IVehicle från public interface IVehicle till public interface IVehicle : IDriveable.
 
 6. Jag ser flera lösningar:
 - Specifik modifikation: för varje fordon direkt i Program-klassen när fordonet skapas. Nackdel: Det blir repetativt om vi har många fordon.
@@ -162,13 +163,16 @@ car.Doors = carDoorModifications[new Random().Next(carDoorModifications.Count)];
 // Ny kod nedanför
 car.Doors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
 ```
-- Skillnaden är att vi skapar en separat ny random-instans för varje gång vi randomiserar koden, det kan ställa till det när vi kör ShuffleList simultant. Tog även bort den hardkodade default-värdet som jag satt i DisplayVehicleDetails. Dels skriver den över det slumpade värdet, dels så är den överflödig för vi slumpar ändå fram ett värde till variabeln..
+- Skillnaden är att vi skapar en separat ny random-instans för varje gång vi randomiserar koden, annars kan det ställa till det när vi kör ShuffleList simultant. Tog även bort det hardkodade default-värdet som jag satt i DisplayVehicleDetails. Dels skriver den över det slumpade värdet, dels så är den överflödig för vi slumpar ändå fram ett värde till variabeln..
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Beskriv några implementeringsval du gjort?
 
-1. TO DO: BESKRIV VEHICLEFOUNDATION-TANKEN HÄR
+1. Det första riktigt stora implementeringsvalet jag gjorde vara skapandet av VehicleFoundation-klassen. Den har jag beskrivit ovan, men:
+- Vi hade fyra metoder som var gemensamma för alla Vehicles: IsEngineOn, StartEngine, StopEngine, Drive. Nu samlas de ihop till en klass istället för i varje ny fordonstyp. DRY (Don't repeat yourself)
+- Tänk modulärt: Vad händer om vi skapar fler gemensamma metoder och/eller fler vehicles? Säg att vi först skapar fler fordon: Tractor, Bus, Truck, Snowmobile, Bycycle etc. Sedan får vi för oss att vi vill ge alla fordon en gemensam metod: VehicleColour(). Behåller vi metoderna inom de respektive klasserna får vi skriva denna metod fem gånger till. Då har vi sju instanser av varje metod, som gör exakt samma sak! Detsamma gäller för alla fordon vi skapar, de kan lätt återanvända de gemensamma metoderna direkt från VehicleFoundation.
+- Det gör också koden mer läsbar. Kan vi hålla koden kortare och kalla på samma kod upprepade gånger så är det verkligen Clean (Code).
 
 2. ChatGPTs förslag till refaktorerings-optimisering:
 - Den föreslår "constructor chaining", dvs jag skapar en konstruktor i CarImplementation som kallar på klassens konstruktor. Det ger en väldigt "clean" CarImplementation:
@@ -191,9 +195,25 @@ namespace CLO24_SecondTurnInNiklasH.Models
 
         // Additional car-specific methods can be added here if needed
     }
-} ```
+}
+```
+Jag valde att implementera den konstruktorn, men justerade koden vidare senare när jag satte åtkomstdirektiven mer begränsande ( get; private set; ), då skapades en InternalDoor-variabel som mellaninstans så hela Doors-biten justerades. Men: lösningen ovan, i princip, användes.
 
+- Medan punkt ett här är ett implementeringsval som styrdes av planering, så var punkt två en konsekvens av refaktorering.
+- Då vill jag gärna visa på ett exempel på en implementering som blev en konsekvens av en problemlösning med:
 
+3. Se punkt 16 i utvecklingsstegen. Inkapslingen skapade problem med åtkomst, och jag ville verkligen skydda en del kod, bland annat genom private set. Lösning var att skapa ytterligare en instans av variablerna: Brand, Model, Year, Doors, engineType.
+- Skapade InternalBrand, InternalModel, InternalYear, InternalMileage, InternalDoors, InternalWeight, InternalUtilityTool och InternalEngineType.
+- Vi kan se hur det hanteras i VehicleFoundation, Tractor- Car- och MotorcycleImplementation:
+```cs
+var IVehicle.Brand // Eller fordonsspecifik
+{
+    get => InternalBrand;
+    set => InternalBrand = value;
+}
+```
+Vad de gör är att de hanterar get/set inom en egen instans, på så sätt finns ingen åtkomst utifrån där "fel" instans kan modifiera värdena.
+Det gör att vi kan ha private set och hantera värdena i ett separat steg utanför den centrala instansen.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -201,8 +221,14 @@ namespace CLO24_SecondTurnInNiklasH.Models
 
 ### Vad lärde du dig genom att genomföra projektet?
 
+TO DO! GLÖM INTE LÄGGA TILL DETTA!!!!
+                                                        <--- OERHÖRT STÖRANDE RAD I CAPS LOCK BARA FÖR ATT SE
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Vilka möjligheter ser du för framtida projekt baserat på denna erfarenhet?
+
+TO DO! GLÖM INTE LÄGGA TILL DETTA!!!!
+                                                        <--- OERHÖRT STÖRANDE RAD I CAPS LOCK BARA FÖR ATT SE
 
 --- Skriv ovanför och ta inte bort denna raden ---
