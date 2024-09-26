@@ -114,6 +114,10 @@ protected override string VehicleTypeName => "Tractor";
 Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Tractor..
 - Jag saknar en fullständig exception check i Main på t ex Doors, Weight, etc. Löser det genom att skapa ett try-catch-block. Se implementeringsval nr 4.
 
+27. Programmering är verkligen lustigt, det går alltid hitta saker att förfina! Nu bytte jag ut if-else-styckena i DisplayOriginalAndModifiedVehicles + DisplayVehicleDetails mot switch statements. Det blir kortare kod, lättare att implementera, och en jättevinst: med "default" så har vi en automatisk default-statement den faller tillbaka på om koden inte fungerar! Love it!
+
+28. Refakturering av Program.cs och skapande av VehicleInitializer.cs-klassen. Se implementeringsval nr 5.
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Utmaningar och lösningar
@@ -225,6 +229,9 @@ Det gör att vi kan ha private set och hantera värdena i ett separat steg utanf
 
 4. Skapade två try-catch block med exception handling i Program.cs. Så kan vi skapa snyggare error handling genom logging, och visa på olika användning av det (använder Exception två gånger och ArgumentException en gång, den hanterar inputvalidation specifikt för om argumentationen blir fel). Renare. Lättare felsöka.
 - Det blir ett större ingrepp i Program.cs, men jag tycker att det är en bra vana att alltid göra exception handling. Det kommer från när jag skapade databaser och databasanslutningar. Att skapa ett try-catch-block där vi får en proper feedback (exception message) om någonting går fel är aldrig en dålig grej. Det finns så mycket att vinna. Felsökning i synnerhet.
+
+5. Valde att skapa en ny klass: VehicleInitializer.cs där jag la all kod som är relaterad till att skapa fordon från Program.cs, så det enda Program.cs gör nu är att Main kallar VehicleInitializer.RunFactory-metoden, och sedan kör den FactoryShutdown när fabriken skall stängas.
+- Det är egentligen ytterligare refaktorering. Att hålla koden clean. Men nu har vi all fordonskontroll i sin egen klass, och programfunktioner i program. Förutom att det är tydligt så skapar det även - återigen - bättre förutsättningar för att ha ett modulärt program. Det är lättare att lägga till/ta bort om vi segmenterar koden. Det här är också så jag gärna skriver program själv så skall jag sätta en personlig prägel på detta så är det här en bra illustration på "mitt" språk. Jag fick justera RunFactory och FactoryShutdown från private till internal för att kunna kalla på dem men det var en mindre justering.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
