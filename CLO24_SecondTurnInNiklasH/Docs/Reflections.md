@@ -112,8 +112,7 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 protected override string VehicleTypeName => "Tractor";
 ```
 Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Tractor..
-- Jag saknar en fullständig exception check i Main på t ex Doors, Weight, etc. Löser det genom att skapa ett try-catch-block.
-- När jag ändå nördar ner i try-catch och exception handling så kan vi skapa snyggare error handling genom logging och att byta ut Exception mot ArgumentException. Renare. Lättare felsöka.
+- Jag saknar en fullständig exception check i Main på t ex Doors, Weight, etc. Löser det genom att skapa ett try-catch-block. Se implementeringsval nr 4.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -223,6 +222,9 @@ var IVehicle.Brand // Eller fordonsspecifik
 ```
 Vad de gör är att de hanterar get/set inom en egen instans, på så sätt finns ingen åtkomst utifrån där "fel" instans kan modifiera värdena.
 Det gör att vi kan ha private set och hantera värdena i ett separat steg utanför den centrala instansen.
+
+4. Skapade två try-catch block med exception handling i Program.cs. Så kan vi skapa snyggare error handling genom logging, och visa på olika användning av det (använder Exception två gånger och ArgumentException en gång, den hanterar inputvalidation specifikt för om argumentationen blir fel). Renare. Lättare felsöka.
+- Det blir ett större ingrepp i Program.cs, men jag tycker att det är en bra vana att alltid göra exception handling. Det kommer från när jag skapade databaser och databasanslutningar. Att skapa ett try-catch-block där vi får en proper feedback (exception message) om någonting går fel är aldrig en dålig grej. Det finns så mycket att vinna. Felsökning i synnerhet.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

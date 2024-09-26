@@ -8,14 +8,29 @@
     {
         static void Main(string[] args)
         {
-            // Create a List of vehicles and display their details
-            List<IVehicle> vehicles = CreateVehicleList();
+            RunFactory();
+        }
 
-            // Shuffle the vehicle list and then display the modified vehicles
-            ShuffleList(vehicles);
-            DisplayOriginalAndModifiedVehicles(vehicles);
+        // Method to encapsulate the entire program logic, this way we can also have a proper try-catch block to handle exceptions
+        private static void RunFactory()
+        {
+            try
+            {
+                // Create a List of vehicles and display their details
+                List<IVehicle> vehicles = CreateVehicleList();
 
-            FactoryShutdown();
+                // Shuffle the vehicle list and then display the modified vehicles
+                ShuffleList(vehicles);
+                DisplayOriginalAndModifiedVehicles(vehicles);
+            }
+            catch (Exception exRun) // Catch any exceptions that occur during the program and print the error message
+            {
+                Console.WriteLine($"An error occurred: {exRun.Message}");
+            }
+            finally
+            {
+                FactoryShutdown();
+            }
         }
 
         // Method to create a list of vehicles
@@ -29,16 +44,27 @@
             // Creating a list to hold all the vehicles
             List<IVehicle> vehicles = new List<IVehicle>();
 
-            // Adding vehicles to the list
-            vehicles.Add(CreateVehicle(carFactory, "Toyota", "Corolla", 2020, 15000, 4));
-            vehicles.Add(CreateVehicle(motorcycleFactory, "Harley Davidson", "Sportster", 2019, 5000, "V-Twin"));
-            vehicles.Add(CreateVehicle(tractorFactory, "John Deere", "X9 Combine", 2021, 1200, "Harvester", 12));
-            vehicles.Add(CreateVehicle(carFactory, "Ford", "Focus", 2018, 30000, 5));
-            vehicles.Add(CreateVehicle(motorcycleFactory, "Yamaha", "MT-07", 2020, 8000, "Parallel Twin"));
-            vehicles.Add(CreateVehicle(tractorFactory, "Massey Ferguson", "6713", 2020, 500, "Loader", 7));
-            vehicles.Add(CreateVehicle(carFactory, "Honda", "Civic", 2021, 10000, 4));
-            vehicles.Add(CreateVehicle(motorcycleFactory, "Ducati", "Monster", 2022, 2000, "V-Twin"));
-            vehicles.Add(CreateVehicle(tractorFactory, "Kubota", "M7", 2020, 600, "Forklift", 11));
+            try
+            {
+                // Adding vehicles to the list
+                vehicles.Add(CreateVehicle(carFactory, "Toyota", "Corolla", 2020, 15000, 4));
+                vehicles.Add(CreateVehicle(motorcycleFactory, "Harley Davidson", "Sportster", 2019, 5000, "V-Twin"));
+                vehicles.Add(CreateVehicle(tractorFactory, "John Deere", "X9 Combine", 2021, 1200, "Harvester", 12));
+                vehicles.Add(CreateVehicle(carFactory, "Ford", "Focus", 2018, 30000, 5));
+                vehicles.Add(CreateVehicle(motorcycleFactory, "Yamaha", "MT-07", 2020, 8000, "Parallel Twin"));
+                vehicles.Add(CreateVehicle(tractorFactory, "Massey Ferguson", "6713", 2020, 500, "Loader", 7));
+                vehicles.Add(CreateVehicle(carFactory, "Honda", "Civic", 2021, 10000, 4));
+                vehicles.Add(CreateVehicle(motorcycleFactory, "Ducati", "Monster", 2022, 2000, "V-Twin"));
+                vehicles.Add(CreateVehicle(tractorFactory, "Kubota", "M7", 2020, 600, "Forklift", 11));
+            }
+            catch (ArgumentException exArgumentExceptionsAddingVehicles) // Catch specific argument exceptions and print the error message
+            {
+                Console.WriteLine($"Vehicle creation error: {exArgumentExceptionsAddingVehicles.Message}");
+            }
+            catch (Exception exAddingVehicles) // Catch any other exceptions that occur during vehicle creation and print the error message
+            {
+                Console.WriteLine($"An error occurred while adding vehicles: {exAddingVehicles.Message}");
+            }
 
             return vehicles;
         }
@@ -70,39 +96,44 @@
             // Create a single Random instance for the entire process
             Random tempRandom = new Random();
 
-            // Display original and modified details
             foreach (var vehicle in vehicles)
             {
-                // Display original details
                 Console.WriteLine("Original Vehicle Details:");
                 DisplayVehicleDetails(vehicle);
 
-                // Apply modifications based on vehicle type
-                if (vehicle is ICar car)
+                try
                 {
-                    // Apply a random door modification from the list
-                    int newDoors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
-                    Console.WriteLine($"Modified Car Doors: {newDoors}");
-                    car.Doors = newDoors;
-                }
-                else if (vehicle is IMotorcycle motorcycle)
-                {
-                    // Apply a random engine modification from the list
-                    string newEngineType = motorcycleEngineModifications[tempRandom.Next(motorcycleEngineModifications.Count)];
-                    Console.WriteLine($"Modified Motorcycle Engine Type: {newEngineType}");
-                    motorcycle.EngineType = newEngineType;
-                }
-                else if (vehicle is ITractor tractor)
-                {
-                    // Apply a random utility modification from the list
-                    string newUtilityTool = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
-                    Console.WriteLine($"Modified Tractor Utility: {newUtilityTool}");
-                    tractor.UtilityTool = newUtilityTool;
+                    // Apply modifications based on vehicle type
+                    if (vehicle is ICar car)
+                    {
+                        // Apply a random door modification from the list
+                        int newDoors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
+                        Console.WriteLine($"Modified Car Doors: {newDoors}");
+                        car.Doors = newDoors;
+                    }
+                    else if (vehicle is IMotorcycle motorcycle)
+                    {
+                        // Apply a random engine modification from the list
+                        string newEngineType = motorcycleEngineModifications[tempRandom.Next(motorcycleEngineModifications.Count)];
+                        Console.WriteLine($"Modified Motorcycle Engine Type: {newEngineType}");
+                        motorcycle.EngineType = newEngineType;
+                    }
+                    else if (vehicle is ITractor tractor)
+                    {
+                        // Apply a random utility modification from the list
+                        string newUtilityTool = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
+                        Console.WriteLine($"Modified Tractor Utility: {newUtilityTool}");
+                        tractor.UtilityTool = newUtilityTool;
 
-                    // Apply a random weight modification from the list
-                    double newWeight = tractorWeightModifications[tempRandom.Next(tractorWeightModifications.Count)];
-                    Console.WriteLine($"Modified Tractor Weight: {newWeight} tons");
-                    tractor.Weight = newWeight;
+                        // Apply a random weight modification from the list
+                        double newWeight = tractorWeightModifications[tempRandom.Next(tractorWeightModifications.Count)];
+                        Console.WriteLine($"Modified Tractor Weight: {newWeight} tons");
+                        tractor.Weight = newWeight;
+                    }
+                }
+                catch (Exception exModifications) // Catch any exceptions that occur during the modification process and print the error message
+                {
+                    Console.WriteLine($"An error occurred while modifying the vehicle: {exModifications.Message}");
                 }
 
                 Console.WriteLine(); // Add a line break between vehicles
