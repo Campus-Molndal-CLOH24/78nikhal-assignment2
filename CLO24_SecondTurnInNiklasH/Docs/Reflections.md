@@ -118,7 +118,7 @@ Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Trac
 
 28. Refakturering av Program.cs och skapande av VehicleInitializer.cs-klassen. Se implementeringsval nr 5.
 
-29. Jag avslutade med att uppdatera detta dokument.
+29. Jag avslutade med att uppdatera detta dokument, ladded up den + kod och kollade sedan så allt stämde med .gitignore. Det gjorde det inte, så fick lägga till ignore på några filer och ta bort lite filer från mitt repository.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
