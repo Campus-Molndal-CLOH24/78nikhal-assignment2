@@ -3,6 +3,19 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Ignoring the .vs folder
+.vs/
+
+# Excluding the Obj folder
+CLO24_SecondTurnInNiklasH/obj/
+
+# Excluding binary files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.bin
+
 # User-specific files
 *.rsuser
 *.suo
