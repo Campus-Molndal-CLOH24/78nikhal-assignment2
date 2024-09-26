@@ -10,6 +10,7 @@ namespace CLO24_SecondTurnInNiklasH.Factories
 
     internal class CarFactory
     {
+        // Factory method to create a CarImplementation object
         internal CarImplementation CreateCar(string brand, string model, int year, double mileage, int doors)
         {
             return new CarImplementation(brand, model, year, mileage, doors);

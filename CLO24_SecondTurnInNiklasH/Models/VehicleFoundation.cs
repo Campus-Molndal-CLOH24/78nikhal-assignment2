@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace CLO24_SecondTurnInNiklasH.Models
 {
     using Interfaces;
+
     public abstract class VehicleFoundation : IVehicle, IDriveable
     {
-        // Properties from IVehicle
+        // Internal properties from the IVehicle interface
         protected string InternalBrand { get; private set; } = string.Empty; // Defaults to an empty string
         protected string InternalModel { get; private set; } = string.Empty;
         protected int InternalYear { get; private set; }
@@ -18,7 +19,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
         // Property to provide a more user-friendly type name
         protected virtual string VehicleTypeName => "Vehicle";
 
-        // Explicit interface implementation to make the properties read-only externally. Extreme security, but shows how it can be done.
+        // Explicit interface implementation to encapsulate the internal properties
         string IVehicle.Brand
         {
             get => InternalBrand;
@@ -52,7 +53,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
         // Engine status property shared by all vehicles
         private bool engineOn = false;
 
-        // IVehicle Methods
+        // IVehicle Methods below: Checking is Engine on?, Start and Stop engine
         public bool IsEngineOn()
         {
             return engineOn;
@@ -76,7 +77,7 @@ namespace CLO24_SecondTurnInNiklasH.Models
             }
         }
 
-        // IDriveable Method
+        // IDriveable Method to simulate driving
         public virtual string Drive()
         {
             if (engineOn)
@@ -89,11 +90,11 @@ namespace CLO24_SecondTurnInNiklasH.Models
             }
         }
 
-        // Overriding ToString to display vehicle details
+        // Overriding ToString to display detailed vehicle information
         public override string ToString()
         {
             return $"Brand: {InternalBrand}, Model: {InternalModel}, Year: {InternalYear}, Mileage: {InternalMileage:N0} km";
-            // the :NO formatting displays the number with thousands separators, i.e. 15,000 instead of 15000
+            // the :NO formatting displays the value (mileage) with thousands separators, i.e. 15 000 instead of 15000
         }
     }
 }

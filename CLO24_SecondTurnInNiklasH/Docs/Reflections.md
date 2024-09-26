@@ -104,7 +104,16 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 
 24. Nu får koden anses vara komplett, men vill bara visa på ytterligare en färdighet för att avsluta detta: Ville lägga till en fordons-specific metod till, så åtminstone en av dem har två. Det vore tråkigt att lägga till en generisk färg (den påverkar alla) så jag skapade vikt i ton på traktorn.
 
-25. Går igenom Reflections.md och kommentarerna i programmet. Städar upp inför inlämning.
+25. Går igenom Reflections.md och kommentarerna i programmet. Städar upp inför inlämning. Flyttar ordning på metoder och kod-block så de följer Clean Code (ligger i den ordning de körs), samt för att se till att de ligger likadant i sina syskonklasser (konsekvent, lättare att läsa, lättare att hitta).
+
+26. När jag går igenom koden en sista gång så tänker jag på två saker:
+- TractorImplementation hade missat en rad som Car- och Motorcycle- hade:
+```cs
+protected override string VehicleTypeName => "Tractor";
+```
+Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Tractor..
+- Jag saknar en fullständig exception check i Main på t ex Doors, Weight, etc. Löser det genom att skapa ett try-catch-block.
+- När jag ändå nördar ner i try-catch och exception handling så kan vi skapa snyggare error handling genom logging och att byta ut Exception mot ArgumentException. Renare. Lättare felsöka.
 
 --- Skriv ovanför och ta inte bort denna raden ---
 

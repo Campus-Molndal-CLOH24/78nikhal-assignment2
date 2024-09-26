@@ -8,6 +8,6 @@ namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
     public interface ICar
     {
-        int Doors { get; set; } // Defines how many doors the car has.
+        int Doors { get; set; } // Car-specific variable that defines the number of doors the car has
     }
 }

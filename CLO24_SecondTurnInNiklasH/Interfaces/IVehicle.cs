@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
+    // This is the IVehicle interface. It is used to define the properties and methods that all vehicles must implement
     public interface IVehicle : IDriveable
     {
         string Brand { get; set; }

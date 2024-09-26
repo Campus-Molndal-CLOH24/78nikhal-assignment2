@@ -13,20 +13,20 @@ namespace CLO24_SecondTurnInNiklasH.Models
         // Internal property with restricted access, property specific to Motorcycle
         protected string InternalEngineType { get; private set; }
 
-        // Explicit implementation of the interface to protect the property
+        // Explicit interface implementation to protect the property
         string IMotorcycle.EngineType
         {
             get => InternalEngineType;
             set => InternalEngineType = value;
         }
 
-        // Override the VehicleTypeName property to return a user-friendly type name
+        // Override to provide a user-friendly type name, "Motorcycle" instead of "Vehicle"
         protected override string VehicleTypeName => "Motorcycle";
 
-        // Setting up the constructor to initialize the properties
+        // Constructor to initialize properties, calling the base class constructor
         public MotorcycleImplementation(string brand, string model, int year, double mileage, string engineType) : base(brand, model, year, mileage)
-        // Input validation
         {
+            // Input validation, engine type cannot be empty or null
             if (string.IsNullOrWhiteSpace(engineType))
                 throw new ArgumentException("Engine type cannot be empty or null.");
 

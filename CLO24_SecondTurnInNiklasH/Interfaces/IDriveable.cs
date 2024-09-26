@@ -8,6 +8,7 @@ namespace CLO24_SecondTurnInNiklasH.Interfaces
 {
     public interface IDriveable
     {
+        // This interface is used to define the Drive method that all vehicles must implement
         string Drive();
     }
 }

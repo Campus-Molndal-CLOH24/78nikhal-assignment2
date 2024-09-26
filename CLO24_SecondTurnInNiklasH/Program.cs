@@ -82,27 +82,27 @@
                 {
                     // Apply a random door modification from the list
                     int newDoors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
-                    Console.WriteLine($"Modified Car Doors: {newDoors}"); // Display only the modified doors
-                    car.Doors = newDoors; // Apply the modification
+                    Console.WriteLine($"Modified Car Doors: {newDoors}");
+                    car.Doors = newDoors;
                 }
                 else if (vehicle is IMotorcycle motorcycle)
                 {
                     // Apply a random engine modification from the list
                     string newEngineType = motorcycleEngineModifications[tempRandom.Next(motorcycleEngineModifications.Count)];
-                    Console.WriteLine($"Modified Motorcycle Engine Type: {newEngineType}"); // Display only the modified engine type
-                    motorcycle.EngineType = newEngineType; // Apply the modification
+                    Console.WriteLine($"Modified Motorcycle Engine Type: {newEngineType}");
+                    motorcycle.EngineType = newEngineType;
                 }
                 else if (vehicle is ITractor tractor)
                 {
                     // Apply a random utility modification from the list
                     string newUtilityTool = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
-                    Console.WriteLine($"Modified Tractor Utility: {newUtilityTool}"); // Display only the modified utility type
-                    tractor.UtilityTool = newUtilityTool; // Apply the modification
+                    Console.WriteLine($"Modified Tractor Utility: {newUtilityTool}");
+                    tractor.UtilityTool = newUtilityTool;
 
                     // Apply a random weight modification from the list
                     double newWeight = tractorWeightModifications[tempRandom.Next(tractorWeightModifications.Count)];
-                    Console.WriteLine($"Modified Tractor Weight: {newWeight} tons"); // Display only the modified weight
-                    tractor.Weight = newWeight; // Apply the modification
+                    Console.WriteLine($"Modified Tractor Weight: {newWeight} tons");
+                    tractor.Weight = newWeight;
                 }
 
                 Console.WriteLine(); // Add a line break between vehicles

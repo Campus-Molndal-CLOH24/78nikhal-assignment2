@@ -7,17 +7,31 @@ using System.Threading.Tasks;
 namespace CLO24_SecondTurnInNiklasH.Models
 {
     using Interfaces;
+
     public class TractorImplementation : VehicleFoundation, ITractor
     {
         // Internal property with restricted access, specific to Tractor
-        protected double InternalWeight { get; private set; } // Weight in tons
+        protected double InternalWeight { get; private set; }
 
-        // Explicit implementation of the interface to protect the property
+        // Explicit interface implementation to protect the property
         double ITractor.Weight
         {
             get => InternalWeight;
             set => InternalWeight = value;
         }
+
+        // Internal property with restricted access, specific to Tractor
+        protected string InternalUtilityTool { get; private set; }
+
+        // Explicit interface implementation to protect the property
+        string ITractor.UtilityTool
+        {
+            get => InternalUtilityTool;
+            set => InternalUtilityTool = value;
+        }
+
+        // Override to provide a user-friendly type name, "Tractor" instead of "Vehicle"
+        protected override string VehicleTypeName => "Tractor";
 
         // Constructor to initialize properties, calling the base class constructor
         public TractorImplementation(string brand, string model, int year, double mileage, string utilityTool, double weight)
@@ -32,16 +46,6 @@ namespace CLO24_SecondTurnInNiklasH.Models
 
             InternalUtilityTool = utilityTool;
             InternalWeight = weight;
-        }
-
-        // Internal property with restricted access, specific to Tractor
-        protected string InternalUtilityTool { get; private set; }
-
-        // Explicit implementation of the interface to protect the property
-        string ITractor.UtilityTool
-        {
-            get => InternalUtilityTool;
-            set => InternalUtilityTool = value;
         }
     }
 }

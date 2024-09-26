@@ -10,6 +10,7 @@ namespace CLO24_SecondTurnInNiklasH.Factories
 
     internal class MotorcycleFactory
     {
+        // Factory method to create a MotorcycleImplementation object
         internal MotorcycleImplementation CreateMotorcycle(string brand, string model, int year, double mileage, string engineType)
         {
             return new MotorcycleImplementation(brand, model, year, mileage, engineType);
