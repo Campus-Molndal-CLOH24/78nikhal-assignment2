@@ -15,7 +15,7 @@ Första intrycket var inte så trevlig, dokumentationen var rörig.
 
 Ovanstående var första-intrycket, det var lite som när vi kör bil i dimma. Jag såg vägmarkeringarna och förstod var jag skulle, men sikten grumlades av störande element. När det gäller själva uppgiften så tyckte jag den var tydlig: Vi har färdig kod och instruktioner för arkitekturen, så det är bara att skapa layouten, lägga in elementen och sedan börja knyta ihop dem.
 
-Här kommer direkt en varningsklocka från erfarenhet från tidigare uppgifter: Det är alltid lättast att bygga element ett i taget, och se till att hålla bort alla varningar och felmeddelanden direkt. Det är mycket lättare att felsöka och revertera en implementation som blivit fel.
+Här kommer direkt en varningsklocka från erfarenhet från tidigare uppgifter: Det är alltid lättast att bygga element ett i taget, och se till att hålla bort alla varningar och felmeddelanden direkt. Då blir det mycket lättare att felsöka och revertera en implementation som blivit fel.
 
 I detta projekt är det naturligt att börja med att lägga in Program-koden med Main-segmentet direkt, och då kan det lätt bli rörigt om vi skall lägga till en klass/interface/metod i taget, vi kommer inte kunna köra main om inte hela layouten finns! Det är också väldigt svårt att jobba i någon annans kod, innan du satt dig in i den.
 
@@ -27,15 +27,15 @@ Nu kommer vi till planering/genomförande ->
 
 ### Vilka steg tog du för att lösa uppgiften?
 
-Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela projektet vs att jobba modulärt. Det är alltid önskvärt att jobba modulärt. Eftersom vi egentligen har ett större ramverk redan så valde jag att skapa alla klasser och interface först, de kan ju finnas utan kod initialt och sedan bygger vi på därifrån. Vid behov kan jag kommentera bort kod i Program/Main och sedan arbeta "modulärt" på det här sättet.
+Intro: Som nämnts ovan så tänkte jag igenom riskerna med att skapa hela projektet vs att jobba modulärt. Det är alltid önskvärt att jobba modulärt. Eftersom vi egentligen har ett större ramverk redan så valde jag att skapa alla klasser och interface, de kan ju finnas utan kod initialt och sedan bygger vi på därifrån. Vid behov kan jag kommentera bort kod i Program/Main och sedan arbeta "modulärt" på det här sättet.
 
-1. läste igenom allt inlämningsmaterial för att få en övergripande bild.
+1. Läste igenom allt projekt-underlag för att få en övergripande bild.
 
 2. Skapade mapp- och filstrukturen och började ta grundtemplates från materialet vi hade tillgång till. Vi hade ju punkten "Steg-för-steg-arbetsgång" så de klasserna skapade jag tidigt.
 
 3. Satte upp en ny github-repository och initialiserade projektets mapp genom bash (git init, git remote add origin etc).
 
-4. Började dokumentera i denna fil, och valde sedan att omgående brancha mitt privata repository till att göra ett internt repo inom CLO24 istället.
+4. Började dokumentera i denna fil, och valde sedan att omgående kopiera mitt privata repository till att göra ett internt repo inom CLO24 istället.
 
 5. Skapade properties och metoder i CarImpl.cs
 
@@ -89,8 +89,8 @@ Detta gör att jag kan printa ut fordonstypen på ett lätt/snyggare sätt. När
 - Skapar metoden DisplayAllVehicles(vehicles) som skriver ut ovanstående lista
 - Sedan kommer Fabriken:
 IVehicle CreateVehicle(CarFactory, bilspecifika parametrar)
-IVehicle CreateVehicle(MotorcycleFactory, motorcykelspecifika parametrar) etc
-Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller Bus.
+IVehicle CreateVehicle(MotorcycleFactory, motorcykelspecifika parametrar) etc.
+Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller Bus. (Edit; Det blev Tractor).
 - Skapar metoden DisplayVehicleDetails: skriver ut till konsollen
 
 21. Skapar dokumentet factorystructure.sql och bifogar i Docs-foldern. Fick hjälp av ChatGPT. Infogar den här:
@@ -102,7 +102,7 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 23. Koden komplett, vi skulle kunna lämna in det nu, men jag vill gärna visa att verktygen fungerar och skapa något annat så jag lägger till fordonet Tractor.
 - ITractor.cs, TractorImplementation.cs, TractorFactory.cs och den nödvändiga koden i Program.
 
-24. Nu får koden anses vara komplett, men vill bara visa på ytterligare en färdighet för att avsluta detta: Ville lägga till en fordons-specific metod till, så åtminstone en av dem har två. Det vore tråkigt att lägga till en generisk färg (den påverkar alla) så jag skapade vikt i ton på traktorn.
+24. Ville lägga till en fordons-specific metod till, så åtminstone en av dem har två. Det vore tråkigt att lägga till en generisk färg (den påverkar alla) så jag skapade vikt i ton på traktorn.
 
 25. Går igenom Reflections.md och kommentarerna i programmet. Städar upp inför inlämning. Flyttar ordning på metoder och kod-block så de följer Clean Code (ligger i den ordning de körs), samt för att se till att de ligger likadant i sina syskonklasser (konsekvent, lättare att läsa, lättare att hitta).
 
@@ -112,9 +112,9 @@ Den fabriken går att utöka såklart, jag planerar att lägga till Truck eller 
 protected override string VehicleTypeName => "Tractor";
 ```
 Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Tractor..
-- Jag saknar en fullständig exception check i Main på t ex Doors, Weight, etc. Löser det genom att skapa ett try-catch-block. Se implementeringsval nr 4.
+- Jag saknar en exception check i Main på t ex Doors, Weight, etc. Löser det genom att skapa ett try-catch-block. Se implementeringsval nr 4.
 
-27. Programmering är verkligen lustigt, det går alltid hitta saker att förfina! Nu bytte jag ut if-else-styckena i DisplayOriginalAndModifiedVehicles + DisplayVehicleDetails mot switch statements. Det blir kortare kod, lättare att implementera, och en jättevinst: med "default" så har vi en automatisk default-statement den faller tillbaka på om koden inte fungerar! Love it!
+27. Programmering är verkligen lustigt, det går alltid hitta saker att förfina! Nu bytte jag ut if-else-styckena i DisplayOriginalAndModifiedVehicles + DisplayVehicleDetails mot switch statements. Det blir kortare kod, lättare att implementera, och en jättevinst: med "default" så har vi en automatisk default-statement den faller tillbaka på om koden inte fungerar! Tydligt!
 
 28. Refakturering av Program.cs och skapande av VehicleInitializer.cs-klassen. Se implementeringsval nr 5.
 
@@ -134,17 +134,19 @@ Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Trac
 
 4. Ny instans av Brand, Model etc. Detta skapar följproblem i formen av att: Vi kan inte fritt använda Ctrl+R och byta namn på alla, vi har ju nästlat in originalvariabeln bakom skydd, men här är felkodsrutan och/eller ChatGPT väldigt väldigt bra hjälpmedel.
 
-5. Följproblem av ovan instansiering: Nu när vi inte Drive()-metoden.
+5. Följproblem av ovan instansiering: Nu når vi inte Drive()-metoden.
 
 6. Noterade att "modify"-linjen på doors/engine är statisk. Modify-strängen ligger som en separat repeterad kodsträng! Alla modifierade dörrar blir 5 st och alla modifierade motorer Inline-4..
 
 7. Följdproblem på ovanstående: Koden ger inga felmeddelanden men den slumpar ändå inte fram en modifikation.
 
+8. När jag gick igenom alla filer i slutet innan inlämning så noterade jag att jag ärvt IDriveable i IVehicle (IVehicle: IDriveable). Eftersom vi inte fick ändra i interface-definitionerna så måste jag lösa detta på ett annat sätt!
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Hur löste du dessa utmaningar?
 
-1. Jag läste noga igenom dokumentationen flera gånger och skapaden en plan för implementation steg-för-steg
+1. Jag läste noga igenom dokumentationen flera gånger och skapaden en plan för implementation steg-för-steg.
 
 2. git -ls -la och sedan rm -rf (namnetpåmappen). Det hade säkert gått lika bra att bara deletea mappen direkt i Windows, men vill ha för vana att använda Bash och CLI.
 
@@ -153,7 +155,7 @@ Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Trac
 public string Brand { get; set; } = string.Empty; // Defaults to an empty string 
 ```
 Eller så löser vi det genom att skapa en konstruktor som sätter default-värden för Brand, Model, Year och Mileage (det gör vi i Motorcycle- och CarImplementation.cs idag).
-string.Empty är en enkel lösning, den senare lösningen gör koden lättare att återanvända, men den blir svårare att läsa och jobbigare om vi skall in och pilla i koden. Jag väljer string.Empty-lösningen!
+string.Empty är en enkel lösning, den senare lösningen gör koden lättare att återanvända, men den blir svårare att läsa och jobbigare om vi skall in och pilla i koden. Jag väljer string.Empty-lösningen! Bonus: Då pillar vi inte på Implementation-filerna.
 
 4. Jag fick 15 errors bara av denna lilla justering, men kopierade/klistrade hela felkodsrutan och frågade bara ChatGPT var jag behöver justera namnen på grund av den nya instansieringen. Ett annat alternativ hade varit att klicka varje felkod för att komma till rätt kod och justera den vägen.
 
@@ -161,7 +163,7 @@ string.Empty är en enkel lösning, den senare lösningen gör koden lättare at
 ```cs
 IDriveable driveableCar = (IDriveable)car;
 ```
-Dels blir det väldigt grötigt i Main (inte särskilt Clean Code!), dels fanns det en enklare lösning: Vi extendar IVehicle från public interface IVehicle till public interface IVehicle : IDriveable.
+Dels blir det väldigt grötigt i Main (inte särskilt Clean Code!), dels fanns det en enklare lösning: Vi extendar IVehicle från public interface IVehicle till public interface IVehicle : IDriveable. Uppdatering! Se punkt 8, vi skulle inte ändra i Interfaces så jag har reverterat denna ändring och löst det på ett annat sätt istället!
 
 6. Jag ser flera lösningar:
 - Specifik modifikation: för varje fordon direkt i Program-klassen när fordonet skapas. Nackdel: Det blir repetativt om vi har många fordon.
@@ -178,6 +180,22 @@ car.Doors = carDoorModifications[new Random().Next(carDoorModifications.Count)];
 car.Doors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
 ```
 - Skillnaden är att vi skapar en separat ny random-instans för varje gång vi randomiserar koden, annars kan det ställa till det när vi kör ShuffleList simultant. Tog även bort det hardkodade default-värdet som jag satt i DisplayVehicleDetails. Dels skriver den över det slumpade värdet, dels så är den överflödig för vi slumpar ändå fram ett värde till variabeln..
+
+8. Jag hade gjort en enkel lösning i DisplayVehicleDetails-metoden:
+```cs
+Console.WriteLine(vehicle.Drive());
+```
+Men nu när inte IDriveable kunde ärvas av IVehicle så löser jag det istället genom att göra en if-else-check:
+```cs
+if (vehicle is IDriveable driveableVehicle)
+{
+    Console.WriteLine(driveableVehicle.Drive());
+}
+else
+{
+    Console.WriteLine("This vehicle cannot be driven.");
+}
+```
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
@@ -235,6 +253,64 @@ Det gör att vi kan ha private set och hantera värdena i ett separat steg utanf
 5. Valde att skapa en ny klass: VehicleInitializer.cs där jag la all kod som är relaterad till att skapa fordon från Program.cs, så det enda Program.cs gör nu är att Main kallar VehicleInitializer.RunFactory-metoden, och sedan kör den FactoryShutdown när fabriken skall stängas.
 - Det är egentligen ytterligare refaktorering. Att hålla koden clean. Men nu har vi all fordonskontroll i sin egen klass, och programfunktioner i program. Förutom att det är tydligt så skapar det även - återigen - bättre förutsättningar för att ha ett modulärt program. Det är lättare att lägga till/ta bort om vi segmenterar koden. Det här är också så jag gärna skriver program själv så skall jag sätta en personlig prägel på detta så är det här en bra illustration på "mitt" språk. Jag fick justera RunFactory och FactoryShutdown från private till internal för att kunna kalla på dem men det var en mindre justering.
 
+6. Jag vill också skriva ett val jag INTE gjorde! Ett alternativ jag hade var att justera hela "fabriken", det vill säga:
+```cs
+// This below section is the "Factory". Utilizing the factory pattern to create vehicles, this can be expanded to include more vehicle types
+private static IVehicle CreateVehicle(CarFactory factory, string brand, string model, int year, double mileage, int doors) // Note: doors
+{
+    return factory.CreateCar(brand, model, year, mileage, doors);
+}
+
+private static IVehicle CreateVehicle(MotorcycleFactory factory, string brand, string model, int year, double mileage, string engineType) // Note: engineType
+{
+    return factory.CreateMotorcycle(brand, model, year, mileage, engineType);
+}
+
+private static IVehicle CreateVehicle(TractorFactory factory, string brand, string model, int year, double mileage, string utilityTool, double weight) // Note: utilityTool, weight
+{
+    return factory.CreateTractor(brand, model, year, mileage, utilityTool, weight);
+}
+```
+- Ett annat sätt att skriva den koden på hade kunnat vara följande:
+```cs
+public class VehicleParameters
+{
+    public string Brand { get; set; }
+    public string Model { get; set; }
+    public int Year { get; set; }
+    public double Mileage { get; set; }
+    public int? Doors { get; set; } // Optional, for cars only
+    public string EngineType { get; set; } // Optional, for motorcycles only
+    public string UtilityTool { get; set; } // Optional, for tractors only
+    public double? Weight { get; set; } // Optional, for tractors only
+}
+```
+- ..och sedan välja att skapa objekten genom följande kod:
+```cs
+private static IVehicle CreateVehicle(IVehicleFactory factory, VehicleParameters parameters)
+{
+    return factory switch
+    {
+        CarFactory carFactory => carFactory.CreateCar(parameters.Brand, parameters.Model, parameters.Year, parameters.Mileage, parameters.Doors ?? 0),
+        MotorcycleFactory motorcycleFactory => motorcycleFactory.CreateMotorcycle(parameters.Brand, parameters.Model, parameters.Year, parameters.Mileage, parameters.EngineType),
+        TractorFactory tractorFactory => tractorFactory.CreateTractor(parameters.Brand, parameters.Model, parameters.Year, parameters.Mileage, parameters.UtilityTool, parameters.Weight ?? 0),
+        _ => throw new ArgumentException("Unsupported vehicle factory.")
+    };
+}
+```
+- Så långt ser det rätt snyggt ut, eller hur? Något långa strängar i switchen och inte helt lättläst kanske, men mindre kod och lättare att lägga till objekt kanske? Men! Det absolut största skälet till att jag inte ville göra så här var för att det blir en otroligt massa text att skriva i form av följande:
+```cs
+vehicles.Add(CreateVehicle(carFactory, new VehicleParameters
+{
+    Brand = "Toyota",
+    Model = "Corolla",
+    Year = 2020,
+    Mileage = 15000,
+    Doors = 4
+}));
+```
+- Så vinsten med denna kod hade varit att vi får en kortare "skapa fordon"-kod. Men nackdelen hade varit att vi hade fått oändligt många rader text för alla objekt vi lägger till! Det blir inte alls lättläst och väldigt jobbigt att scrolla. Hur vi än gör så går vi lite emot Clean Code i båda fallen, men jag vet att Uncle Bob nämner i Clean Code att ibland så är vi tvungna att repetera kod, även om avsikten bör vara att undvika det. Därför väljer jag att hellre ha de fåtalet extra strängarna i min switch när jag skriver ut fordonen. Om vi hade haft väldigt väldigt många fordonstyper, då hade jag övervägt en annan lösning.
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Reflektion och utvärdering
@@ -249,18 +325,20 @@ Det gör att vi kan ha private set och hantera värdena i ett separat steg utanf
 
 3. En liten bonus, den nämner jag i punkt tre i 'framtida projekt' nedanför.
 
-4. Planeringen visste jag var viktig, av erfarenhet, men även att veta när det är dags att sätta punkt. Det här projektet hade kunnat växa hur mycket som helst. Det är viktigt att sätta ramverk, och jag tar med mig att även om jag redan vet det, och har erfarenhet, så var det ändå bra att ha en checklista "det här skall göras", och det här dokumentet som följer upp projektets utveckling. Jag har redan gjort mer än vad vi skulle, men det har jag gjort för att tiden fanns och framförallt för att det var kul (och kul att utmana sig själv, med!). Har ändå med mig någonstans att struktur och ramar är absolut nödvändigt för att kunna lägga upp en plan, följa planen, avsluta den. Det blir som en naturlig agil mini-sprint, detta!
+4. Planeringen visste jag var viktig, av erfarenhet, men även att veta när det är dags att sätta punkt. Det här projektet hade kunnat växa hur mycket som helst. Det är viktigt att sätta ramverk, och jag tar med mig att även om jag redan vet det, och har erfarenhet, så var det ändå bra att ha en checklista "det här skall göras", och det här dokumentet som följer upp projektets utveckling.
+
+Jag har redan gjort mer än vad vi skulle, men det har jag gjort för att tiden fanns och framförallt för att det var kul (och kul att utmana sig själv, med!). Har ändå med mig någonstans att struktur och ramar är absolut nödvändigt för att kunna lägga upp en plan, följa planen, avsluta den. Det blir som en naturlig agil mini-sprint, detta!
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Vilka möjligheter ser du för framtida projekt baserat på denna erfarenhet?
 
 1. När jag skapade en extra instans av Brand, Model etc så öppnade det en massa dörrar med. Jag har såklart instansierat förut, men att göra det på detta sätt för att kunna köra get; private set och även hålla väldigt rena/refaktorerade interfaces/fabriker var riktigt trevligt. Jag tror att hade jag byggt vidare på detta projekt så hade jag nog gjort följande: Klämt ihop alla interfaces i ett enda .cs-dokument och alla factories i ett annat. Nu skulle vi inte röra de filerna, men jag ser en möjlighet att streamlinea kod/filer på det viset, i alla fall i ett sådant här projekt där filerna är så få.
-- En sidofråga där är dock, är det risk att vi käkar mer minne om vi laddar in mer info? Skulle det varit fördelaktigt att ha kvar små kodblock i varsin fil i en Interfaces-folder, till exempel?
+- En sidofråga där är dock, är det risk att vi käkar mer minne om vi laddar in mer info? Skulle det varit fördelaktigt att ha kvar små kodblock i varsin fil i en Interfaces-folder, till exempel? Det kan vara en fördel med om de interfacen är en del av ett stort projekt, att de ligger i en mappstruktur som ingen av utvecklarna sedan skall röra. Bara använda.
 
 2. Nu känns det naturligt att implementera unit testing, koden är så segmenterad redan att jag tror det vore både lätt och ett bra sätt att utveckla båda färdigheter och programmet i sig.
 
-3. Det var kul att jobba med mappar/folders, där ser jag större möjligheter i framtida projekt. Jag brukar alltid ha en lång lista med klasser, men när vi gör på det här sättet så kan vi ju välja "using" och bara implementera det vi behöver använda för stunden. Det skulle vara väldigt lätt att strukturera upp mina program på ett smartare sätt i framtiden! Bra erfarenhet.
+3. Det var kul att jobba med mappar/folders, där ser jag större möjligheter i framtida projekt. Jag brukar alltid ha en lång lista (segmenerat koden!) med .cs-filer, men när vi gör på det här sättet så kan vi ju välja "using" och bara implementera det vi behöver använda för stunden. Det skulle vara väldigt lätt att strukturera upp mina program på ett smartare sätt i framtiden! Bra erfarenhet.
 
 4. Hela fabriken och strukturen med Interfaces var kul att prova, alla små kodexempel vi skrivit har tidigare inte lyckats göra riktigt nytta av de verktygen. Nu kunde vi se när det faktiskt kan göra skillnad. Jag kan se fabriks- eller andra strukturer göra nytta i olika projekt.
 

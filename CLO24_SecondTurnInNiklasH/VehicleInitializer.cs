@@ -167,7 +167,17 @@ namespace CLO24_SecondTurnInNiklasH
             Console.WriteLine(vehicle.ToString());
             vehicle.StartEngine();
             Console.WriteLine("Vehicle engine status: " + (vehicle.IsEngineOn() ? "On" : "Off"));
-            Console.WriteLine(vehicle.Drive());
+
+            // Check if the vehicle is driveable, then call the Drive method
+            if (vehicle is IDriveable driveableVehicle)
+            {
+                Console.WriteLine(driveableVehicle.Drive());
+            }
+            else
+            {
+                Console.WriteLine("This vehicle cannot be driven.");
+            }
+
             vehicle.StopEngine();
             Console.WriteLine("Vehicle engine status: " + (vehicle.IsEngineOn() ? "On" : "Off"));
 

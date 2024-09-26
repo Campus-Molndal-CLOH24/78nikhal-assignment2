@@ -1,28 +1,33 @@
 ### CLO24_NiklasH_VehicleFactory 
+
 Second turn in assignment for CLO24, Cloud Developer 2024 at Campus Mölndal  
-  
-## Licence agreement  
-  
-In general the MIT Licence applies, see at the end of this document.  
-  
-If this code is copied wholly or partially, then please make a reference to the original source (this project at GitHub).  
-  
-Original creator and conceptual design by Niklas Häll (https://github.com/mymh13)  
-  
+
+We are creating a Vehicle Factory, utilizing the Factory model with Interfaces.
+The challenges: Utilizing pre-set Interfaces without altering them. Apply Polymorphism. Working with someone elses code layout.  
+
 ## Documentation  
-Initial design, conceptual ideas and planning can be found in the Reflections.md file in the project -> Docs folder.  
+
+Initial design, conceptual ideas and planning can be found in the Docs\Reflections.md file in the project -> Docs folder.  
   
-Version history and development phases can also be found in the Reflections.md file  
+Version history and development phases can also be found in the Docs\Reflections.md file  
   
-Issues resolved and future expansion ideas is also presented in the Reflections.md  
+Issues resolved and future expansion ideas is also presented in the Docs\Reflections.md  
   
 # Final comment  
+
 I hope you enjoy the brief little program!  
 Please feel free to contact me if any thoughts or questions arise.  
 Regards,  
 Niklas H.  
+
+## Licence agreement  
+  
+In general the MIT Licence applies, see at the end of this document.  
+If this code is copied wholly or partially, then please make a reference to the original source (this project at GitHub).  
+  Original creator and conceptual design by Niklas Häll (https://github.com/mymh13) 
   
 # The MIT Licence (MIT) applies in general to this project  
+
 The MIT License (MIT)  
   
 Copyright (c) 2024 Niklas Häll  
