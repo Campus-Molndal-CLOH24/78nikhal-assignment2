@@ -118,6 +118,8 @@ Har lagt till den raden! Annars hade vi skrivit ut "Vehicle" istället för Trac
 
 28. Refakturering av Program.cs och skapande av VehicleInitializer.cs-klassen. Se implementeringsval nr 5.
 
+29. Jag avslutade med att uppdatera detta dokument.
+
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ## Utmaningar och lösningar
@@ -239,14 +241,27 @@ Det gör att vi kan ha private set och hantera värdena i ett separat steg utanf
 
 ### Vad lärde du dig genom att genomföra projektet?
 
-TO DO! GLÖM INTE LÄGGA TILL DETTA!!!!
-                                                        <--- OERHÖRT STÖRANDE RAD I CAPS LOCK BARA FÖR ATT SE
+- Egentligen använde jag mestadels verktyg som jag redan använt tidigare, men två saker som jag faktiskt både velat göra och nu fick möjlighet till var:
+
+1. Dels så var det kul att få börja jobba i ett projekt som redan var påbörjat, någon annans kod och struktur. Det kräver ett annat tänk och ger andra utmaningar än att starta från scratch. Bra erfarenhet inför framtiden och någonting jag gärna provar på fler gånger inom en snar framtid.
+
+2. Dels har jag länge velat göra switch-statements istället för if-else-satser, jag ser många fördelar med det! Tydligt, säkrare, snyggare, mindre nestling, mindre minneskrävande. Nu fick jag ett ypperligt tillfälle att testköra det! Mycket mycket nöjd med den implementationen.
+
+3. En liten bonus, den nämner jag i punkt tre i 'framtida projekt' nedanför.
+
+4. Planeringen visste jag var viktig, av erfarenhet, men även att veta när det är dags att sätta punkt. Det här projektet hade kunnat växa hur mycket som helst. Det är viktigt att sätta ramverk, och jag tar med mig att även om jag redan vet det, och har erfarenhet, så var det ändå bra att ha en checklista "det här skall göras", och det här dokumentet som följer upp projektets utveckling. Jag har redan gjort mer än vad vi skulle, men det har jag gjort för att tiden fanns och framförallt för att det var kul (och kul att utmana sig själv, med!). Har ändå med mig någonstans att struktur och ramar är absolut nödvändigt för att kunna lägga upp en plan, följa planen, avsluta den. Det blir som en naturlig agil mini-sprint, detta!
 
 --- Skriv ovanför och ta inte bort denna raden ---
 
 ### Vilka möjligheter ser du för framtida projekt baserat på denna erfarenhet?
 
-TO DO! GLÖM INTE LÄGGA TILL DETTA!!!!
-                                                        <--- OERHÖRT STÖRANDE RAD I CAPS LOCK BARA FÖR ATT SE
+1. När jag skapade en extra instans av Brand, Model etc så öppnade det en massa dörrar med. Jag har såklart instansierat förut, men att göra det på detta sätt för att kunna köra get; private set och även hålla väldigt rena/refaktorerade interfaces/fabriker var riktigt trevligt. Jag tror att hade jag byggt vidare på detta projekt så hade jag nog gjort följande: Klämt ihop alla interfaces i ett enda .cs-dokument och alla factories i ett annat. Nu skulle vi inte röra de filerna, men jag ser en möjlighet att streamlinea kod/filer på det viset, i alla fall i ett sådant här projekt där filerna är så få.
+- En sidofråga där är dock, är det risk att vi käkar mer minne om vi laddar in mer info? Skulle det varit fördelaktigt att ha kvar små kodblock i varsin fil i en Interfaces-folder, till exempel?
+
+2. Nu känns det naturligt att implementera unit testing, koden är så segmenterad redan att jag tror det vore både lätt och ett bra sätt att utveckla båda färdigheter och programmet i sig.
+
+3. Det var kul att jobba med mappar/folders, där ser jag större möjligheter i framtida projekt. Jag brukar alltid ha en lång lista med klasser, men när vi gör på det här sättet så kan vi ju välja "using" och bara implementera det vi behöver använda för stunden. Det skulle vara väldigt lätt att strukturera upp mina program på ett smartare sätt i framtiden! Bra erfarenhet.
+
+4. Hela fabriken och strukturen med Interfaces var kul att prova, alla små kodexempel vi skrivit har tidigare inte lyckats göra riktigt nytta av de verktygen. Nu kunde vi se när det faktiskt kan göra skillnad. Jag kan se fabriks- eller andra strukturer göra nytta i olika projekt.
 
 --- Skriv ovanför och ta inte bort denna raden ---
