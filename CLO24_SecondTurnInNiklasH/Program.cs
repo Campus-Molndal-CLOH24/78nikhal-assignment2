@@ -14,7 +14,7 @@
         // Method to encapsulate the entire program logic, this way we can also have a proper try-catch block to handle exceptions
         private static void RunFactory()
         {
-            try
+            try // Try to run the program logic, else catch any exceptions that occur
             {
                 // Create a List of vehicles and display their details
                 List<IVehicle> vehicles = CreateVehicleList();
@@ -23,7 +23,7 @@
                 ShuffleList(vehicles);
                 DisplayOriginalAndModifiedVehicles(vehicles);
             }
-            catch (Exception exRun) // Catch any exceptions that occur during the program and print the error message
+            catch (Exception exRun)
             {
                 Console.WriteLine($"An error occurred: {exRun.Message}");
             }
@@ -44,7 +44,7 @@
             // Creating a list to hold all the vehicles
             List<IVehicle> vehicles = new List<IVehicle>();
 
-            try
+            try // Try to add vehicles to the list, else catch any exceptions that occur
             {
                 // Adding vehicles to the list
                 vehicles.Add(CreateVehicle(carFactory, "Toyota", "Corolla", 2020, 15000, 4));
@@ -84,7 +84,7 @@
             }
         }
 
-        // Method to display original and modified vehicle details
+        // Method to display original and modified vehicle details using a switch statement
         private static void DisplayOriginalAndModifiedVehicles(List<IVehicle> vehicles)
         {
             // Define lists of possible modifications
@@ -103,37 +103,41 @@
 
                 try
                 {
-                    // Apply modifications based on vehicle type
-                    if (vehicle is ICar car)
+                    // Apply modifications based on vehicle type using a switch type pattern
+                    switch (vehicle)
                     {
-                        // Apply a random door modification from the list
-                        int newDoors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
-                        Console.WriteLine($"Modified Car Doors: {newDoors}");
-                        car.Doors = newDoors;
-                    }
-                    else if (vehicle is IMotorcycle motorcycle)
-                    {
-                        // Apply a random engine modification from the list
-                        string newEngineType = motorcycleEngineModifications[tempRandom.Next(motorcycleEngineModifications.Count)];
-                        Console.WriteLine($"Modified Motorcycle Engine Type: {newEngineType}");
-                        motorcycle.EngineType = newEngineType;
-                    }
-                    else if (vehicle is ITractor tractor)
-                    {
-                        // Apply a random utility modification from the list
-                        string newUtilityTool = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
-                        Console.WriteLine($"Modified Tractor Utility: {newUtilityTool}");
-                        tractor.UtilityTool = newUtilityTool;
+                        case ICar car:
+                            // Apply a random door modification from the list
+                            int newDoors = carDoorModifications[tempRandom.Next(carDoorModifications.Count)];
+                            Console.WriteLine($"Modified Car Doors: {newDoors}");
+                            car.Doors = newDoors;
+                            break;
 
-                        // Apply a random weight modification from the list
-                        double newWeight = tractorWeightModifications[tempRandom.Next(tractorWeightModifications.Count)];
-                        Console.WriteLine($"Modified Tractor Weight: {newWeight} tons");
-                        tractor.Weight = newWeight;
+                        case IMotorcycle motorcycle:
+                            // Apply a random engine modification from the list
+                            string newEngineType = motorcycleEngineModifications[tempRandom.Next(motorcycleEngineModifications.Count)];
+                            Console.WriteLine($"Modified Motorcycle Engine Type: {newEngineType}");
+                            motorcycle.EngineType = newEngineType;
+                            break;
+
+                        case ITractor tractor:
+                            // Apply a random utility modification from the list
+                            string newUtilityTool = tractorUtilityModifications[tempRandom.Next(tractorUtilityModifications.Count)];
+                            Console.WriteLine($"Modified Tractor Utility: {newUtilityTool}");
+                            tractor.UtilityTool = newUtilityTool;
+                            // Apply a random weight modification from the list
+                            double newWeight = tractorWeightModifications[tempRandom.Next(tractorWeightModifications.Count)];
+                            Console.WriteLine($"Modified Tractor Weight: {newWeight} tons");
+                            tractor.Weight = newWeight;
+                            break;
+                        default:
+                            Console.WriteLine("Unknown vehicle type.");
+                            break;
                     }
                 }
-                catch (Exception exModifications) // Catch any exceptions that occur during the modification process and print the error message
+                catch (Exception exModification) // Catch any other exceptions that occur during vehicle modification and print the error message
                 {
-                    Console.WriteLine($"An error occurred while modifying the vehicle: {exModifications.Message}");
+                    Console.WriteLine($"An error occurred while modifying the vehicle: {exModification.Message}");
                 }
 
                 Console.WriteLine(); // Add a line break between vehicles
@@ -141,26 +145,22 @@
         }
 
         // This below section is the "Factory". We are utilizing the factory pattern to create vehicles, this can be expanded to include more vehicle types
-
-        // Generic method to create a Car
         private static IVehicle CreateVehicle(CarFactory factory, string brand, string model, int year, double mileage, int doors) // Note: doors
         {
             return factory.CreateCar(brand, model, year, mileage, doors);
         }
 
-        // Generic method to create a Motorcycle
         private static IVehicle CreateVehicle(MotorcycleFactory factory, string brand, string model, int year, double mileage, string engineType) // Note: engineType
         {
             return factory.CreateMotorcycle(brand, model, year, mileage, engineType);
         }
 
-        // Generic method to create a Tractor
         private static IVehicle CreateVehicle(TractorFactory factory, string brand, string model, int year, double mileage, string utilityTool, double weight)
         {
             return factory.CreateTractor(brand, model, year, mileage, utilityTool, weight);
         }
 
-        // Method to display vehicle details - here we also check for car and motorcycle specific properties
+        // Method to display vehicle details - here we also check for car, motorcycle, tractor specific properties
         private static void DisplayVehicleDetails(IVehicle vehicle)
         {
             Console.WriteLine(vehicle.ToString());
@@ -170,23 +170,21 @@
             vehicle.StopEngine();
             Console.WriteLine("Vehicle engine status: " + (vehicle.IsEngineOn() ? "On" : "Off"));
 
-            // Check for car-specific properties
-            if (vehicle is ICar car)
+            // Check for specific properties based on the vehicle type using a switch statement
+            switch (vehicle)
             {
-                Console.WriteLine($"Car doors: {car.Doors}"); // Display the modified number of doors
-            }
+                case ICar car:
+                    Console.WriteLine($"Car doors: {car.Doors}"); // Display the modified number of doors
+                    break;
 
-            // Check for motorcycle-specific properties
-            if (vehicle is IMotorcycle motorcycle)
-            {
-                Console.WriteLine($"Motorcycle engine type: {motorcycle.EngineType}"); // Display the modified engine type
-            }
+                case IMotorcycle motorcycle:
+                    Console.WriteLine($"Motorcycle engine type: {motorcycle.EngineType}"); // Display the modified engine type
+                    break;
 
-            // Check for tractor-specific properties
-            if (vehicle is ITractor tractor)
-            {
-                Console.WriteLine($"Tractor utility tool: {tractor.UtilityTool}"); // Display the utility tool
-                Console.WriteLine($"Tractor Weight: {tractor.Weight} tons"); // Display the weight
+                case ITractor tractor:
+                    Console.WriteLine($"Tractor utility tool: {tractor.UtilityTool}"); // Display the utility tool
+                    Console.WriteLine($"Tractor Weight: {tractor.Weight} tons"); // Display the weight
+                    break;
             }
         }
 
